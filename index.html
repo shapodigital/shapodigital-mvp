@@ -94,8 +94,8 @@
     .feat-content p { font-size:0.95rem; font-weight:300; color:var(--white-60); line-height:1.5; }
     
     .mosaic-wrap { position:relative; display:grid; grid-template-columns:repeat(12, 1fr); grid-template-rows:repeat(12, 1fr); gap:12px; height:640px; }
-    .m-item { border-radius:12px; overflow:hidden; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.6); will-change:transform; }
-    .m-item img { width:100%; height:120%; object-fit:cover; display:block; filter:brightness(0.85); transform:translateY(-10%); will-change:transform; }
+    .m-item { position:relative; overflow:hidden; will-change:transform; mask-image: radial-gradient(circle at center, black 60%, transparent 100%); -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%); }
+    .m-item img { width:100%; height:120%; object-fit:cover; display:block; filter:brightness(0.9) contrast(1.1); transform:translateY(-10%); will-change:transform; }
     .m-item:hover img { filter:brightness(1.1); }
     .m1 { grid-column:1 / 8; grid-row:1 / 8; }
     .m2 { grid-column:8 / 13; grid-row:2 / 7; }
@@ -106,14 +106,14 @@
     .m-accent-l { font-size:0.85rem; color:var(--white); letter-spacing:0.1em; margin-top:4px; font-weight:500; }
 
     /* ── EVENTS (MASONRY) ── */
-    .events-bg { background:var(--black-2); position:relative; }
+    .events-bg { background:transparent; position:relative; }
     .ev-header { margin-bottom:50px; text-align:center; }
     .ev-header .body-text { margin:0 auto; }
     .ev-grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:16px; }
-    .ev-card { position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.5); will-change:transform, opacity; }
+    .ev-card { position:relative; will-change:transform, opacity; overflow:hidden; mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); }
     .ev-card img, .ev-card video { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.8) contrast(1.1); transition:filter 0.5s, transform 0.8s var(--ease); }
     .ev-card:hover img, .ev-card:hover video { filter:brightness(1.1) contrast(1.1); transform:scale(1.05); }
-    .ev-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%); opacity:0; transition:opacity 0.4s; pointer-events:none; }
+    .ev-overlay { display:none; }
     .ev-card:hover .ev-overlay { opacity:1; }
     
     .ev1 { grid-column:1 / 8; height:450px; } 
