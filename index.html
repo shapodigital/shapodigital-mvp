@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="מלך הנרגילות לאירועים - השכרת עמדות נרגילה פרימיום לכל סוגי האירועים. נרגילות איכותיות, טבק משובח, מפעיל צמוד. לפרטים: 054-694-0927" />
+  <meta name="keywords" content="מלך הנרגילות, נרגילה לאירועים, השכרת נרגילה, נרגילה לחתונה, נרגילה לבר מצווה, נרגילה פרימיום, אמיר נרגילה" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="מלך הנרגילות | עמדות נרגילה פרימיום לאירועים" />
+  <meta property="og:description" content="משדרגים את האירוע שלכם עם עמדות נרגילה מהמלך. נרגילות איכותיות, טבק משובח, מפעיל צמוד לאורך כל האירוע." />
+  <meta property="og:image" content="https://media.base44.com/images/public/6a4393fe152404712a5afe37/6c751f1a6_.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <title>מלך הנרגילות | עמדות נרגילה פרימיום לאירועים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96D;
+      --gold-dark: #8B6914;
+      --black: #0A0A0A;
+      --black-mid: #111111;
+      --black-card: #161616;
+      --white: #F5F0E8;
+      --white-dim: rgba(245,240,232,0.75);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background var(--transition), padding var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(20px);
+      padding: 14px 40px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.4);
+    }
+    .nav-logo-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--white-dim);
+      letter-spacing: 0.1em;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 11px 26px;
+      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.55) 0%,
+        rgba(10,10,10,0.3) 40%,
+        rgba(10,10,10,0.75) 80%,
+        rgba(10,10,10,1) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .hero-title .gold { color: var(--gold-light); }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--white-dim);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.35);
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold-light);
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      transform: translateY(-2px);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.5;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 120px 24px; }
+    .container { max-width: 1160px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .section-title .gold { color: var(--gold-light); }
+    .section-body {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--white-dim);
+      line-height: 1.8;
+      max-width: 640px;
+    }
+    .gold-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    /* ─── ABOUT ─── */
+    .about { background: var(--black-mid); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image-wrap img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+    .about-image-frame {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: calc(100% - 30px);
+      height: calc(100% - 30px);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .about-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(10,10,10,0.9);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .about-badge-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .about-badge-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--white-dim);
+      margin-top: 4px;
+    }
+    .features-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .feature-text {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    /* ─── PACKAGES ─── */
+    .packages { background: var(--black); }
+    .packages-header { text-align: center; margin-bottom: 64px; }
+    .packages-header .section-body { margin: 0 auto; text-align: center; }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .package-card {
+      background: var(--black-card);
+      padding: 52px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-dark);
+      transition: background var(--transition);
+    }
+    .package-card.featured::before { background: var(--gold); }
+    .package-card:hover { transform: translateY(-6px); }
+    .package-card:hover::before { background: var(--gold-light); }
+    .package-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.2);
+      margin-bottom: 24px;
+    }
+    .package-card.featured .package-badge {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .package-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .package-count {
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .package-divider {
+      width: 32px;
+      height: 1px;
+      background: rgba(201,168,76,0.3);
+      margin-bottom: 28px;
+    }
+    .package-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .package-features li {
+      font-size: 0.9rem;
+      color: var(--white-dim);
+      font-weight: 300;
+      line-height: 1.5;
+      padding-right: 16px;
+      position: relative;
+    }
+    .package-features li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .package-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold-light);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .package-card.featured .package-cta {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .package-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .package-extra {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.4);
+      text-align: center;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery { background: var(--black-mid); }
+    .gallery-header { margin-bottom: 48px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 3px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: brightness(0.88);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1);
+    }
+    .g1 { grid-column: 1 / 6; grid-row: 1; height: 420px; }
+    .g2 { grid-column: 6 / 10; grid-row: 1; height: 420px; }
+    .g3 { grid-column: 10 / 13; grid-row: 1; height: 420px; }
+    .g4 { grid-column: 1 / 5; grid-row: 2; height: 320px; }
+    .g5 { grid-column: 5 / 9; grid-row: 2; height: 320px; }
+    .g6 { grid-column: 9 / 13; grid-row: 2; height: 320px; }
+
+    /* ─── TESTIMONIAL / STATS ─── */
+    .stats { background: var(--black); padding: 80px 24px; }
+    .stats-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .stat-item {
+      background: var(--black-card);
+      padding: 48px 32px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      transition: border-color var(--transition);
+    }
+    .stat-item:hover { border-color: var(--gold); }
+    .stat-num {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--white-dim);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CTA STRIP ─── */
+    .cta-strip {
+      background: var(--gold);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .cta-strip p {
+      font-size: 1.1rem;
+      color: rgba(10,10,10,0.7);
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .cta-strip .btn-dark {
+      display: inline-block;
+      background: var(--black);
+      color: var(--gold-light);
+      padding: 18px 52px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .cta-strip .btn-dark:hover {
+      background: var(--black-mid);
+      transform: translateY(-2px);
+    }
+    .cta-phone {
+      display: block;
+      margin-top: 20px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .cta-contact-name {
+      font-size: 0.85rem;
+      color: rgba(10,10,10,0.6);
+      margin-top: 6px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black-mid);
+      padding: 64px 24px 32px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .footer-brand img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+    .footer-brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .footer-brand-tagline {
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      font-weight: 300;
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color var(--transition), background var(--transition);
+      text-decoration: none;
+      color: var(--gold);
+    }
+    .social-link:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+    .social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    .footer-contact h4 {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .footer-contact a {
+      display: block;
+      color: var(--white-dim);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+      transition: color var(--transition);
+    }
+    .footer-contact a:hover { color: var(--gold-light); }
+    .footer-contact a strong {
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.35);
+      font-weight: 300;
+    }
+
+    /* ─── WHATSAPP FLOAT ─── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(37,211,102,0.55);
+    }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ─── FADE-IN UTILITY ─── */
+    .reveal { opacity: 0; transform: translateY(32px); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-logo-text { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-image-wrap img { height: 380px; }
+      .packages-grid { grid-template-columns: 1fr; gap: 3px; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .g1, .g2, .g3, .g4, .g5, .g6 {
+        grid-column: auto;
+        grid-row: auto;
+        height: 260px;
+      }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .footer-top { flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      section { padding: 80px 20px; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .g1, .g2, .g3, .g4, .g5, .g6 { height: 240px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero" aria-label="מלך הנרגילות - לאירועים">
+      <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/6c751f1a6_.jpg" alt="לוגו מלך הנרגילות" width="52" height="52" />
+      <div class="nav-logo-text">
+        מלך הנרגילות
+        <span>עמדות נרגילה לאירועים</span>
+      </div>
+    </a>
+    <a class="nav-cta" href="tel:0546940927">054-694-0927</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow" id="heroEyebrow">עמדות נרגילה פרימיום לאירועים</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="gold">מלך</span><br>הנרגילות
+      </h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        מגיעים אליכם עם הנרגילות הכי איכותיות, הציוד הכי מתקדם והטבק הכי משובח שקיים בארץ
+      </p>
+      <div class="hero-actions" id="heroActions">
+        <a class="btn-primary" href="tel:0546940927">להזמנה עכשיו</a>
+        <a class="btn-outline" href="#packages">הצג חבילות</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>גלול</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats" aria-label="נתוני מפתח">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">אירועים בוצעו</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">שנות ניסיון</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">10</div>
+        <div class="stat-label">עמדות לאירוע</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">שביעות רצון</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap reveal">
+          <img
+            src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg"
+            alt="עמדת נרגילה פרימיום באירוע"
+            width="600" height="580"
+            loading="lazy"
+          />
+          <div class="about-image-frame"></div>
+          <div class="about-badge">
+            <div class="about-badge-num">10</div>
+            <div class="about-badge-text">עמדות לאירוע</div>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p class="section-label">מי אנחנו</p>
+          <div class="gold-line"></div>
+          <h2 class="section-title">
+            חוויית נרגילה<br><span class="gold">ברמת מלך</span>
+          </h2>
+          <p class="section-body">
+            מלך הנרגילות לאירועים מגיע אליכם עם הנרגילות הכי איכותיות, הציוד הכי מתקדם והטבק הכי משובח שקיים בארץ. משדרגים את האירוע עם מבחר נרגילות מרהיב ומפעיל צמוד לאורך כל האירוע.
+          </p>
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">מבחר נרגילות סוריות וגרמניות ורוסיות ברמות שונות לבחירה</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">מבחר סוגי טבק ברמות הגבוהות ביותר, כולל עלי-טה-טבק</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">ראשים מיוחדים וקלאודים לניהול חום מקצועי</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">גחלים טבעיים ברמה גבוהה, כולל סינטטיים</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">מפעיל צמוד לאורך כל שעות האירוע</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <p class="feature-text">חבילות אטרקטיביות עם מחירים מיוחדים לכל סוגי האירועים</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="packages" id="packages">
+    <div class="container">
+      <div class="packages-header reveal">
+        <p class="section-label">החבילות שלנו</p>
+        <div class="gold-line" style="margin: 0 auto 24px;"></div>
+        <h2 class="section-title">החבילות של המלך</h2>
+        <p class="section-body">עד 10 טעמים לבחירה בכל חבילה. כולל מפעיל צמוד עד 4 שעות.</p>
+      </div>
+      <div class="packages-grid">
+
+        <!-- GOLD -->
+        <div class="package-card reveal">
+          <div class="package-badge">Gold</div>
+          <h3 class="package-name">חבילת גולד</h3>
+          <p class="package-count">10 נרגילות סוריות</p>
+          <div class="package-divider"></div>
+          <ul class="package-features">
+            <li>10 נרגילות סוריות איכותיות גדולות</li>
+            <li>טבק וגחלים רגילים וסינטטיים</li>
+            <li>חופשי כל הערב</li>
+            <li>מפעיל צמוד עד 4 שעות</li>
+            <li>עד 10 טעמים לבחירה</li>
+          </ul>
+          <a class="package-cta" href="https://wa.me/972546940927?text=שלום, אני מעוניין בחבילת גולד" target="_blank" rel="noopener">לפרטים והזמנה</a>
+          <p class="package-extra">תוספת ראש פרי - 75 ש"ח ליחידה</p>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="package-card featured reveal">
+          <div class="package-badge">Premium</div>
+          <h3 class="package-name">חבילת פרימיום</h3>
+          <p class="package-count">10 נרגילות גרמניות</p>
+          <div class="package-divider"></div>
+          <ul class="package-features">
+            <li>10 נרגילות גרמניות איכותיות גדולות</li>
+            <li>טבק רוסי עלי-טה-טבק</li>
+            <li>גחלים טבעיים חופשי כל הערב</li>
+            <li>ראש סמסריס וקלאוד לניהול חום</li>
+            <li>מפעיל צמוד עד 4 שעות</li>
+          </ul>
+          <a class="package-cta" href="https://wa.me/972546940927?text=שלום, אני מעוניין בחבילת פרימיום" target="_blank" rel="noopener">לפרטים והזמנה</a>
+          <p class="package-extra">תוספת ראש פרי - 75 ש"ח ליחידה</p>
+        </div>
+
+        <!-- PLATINUM -->
+        <div class="package-card reveal">
+          <div class="package-badge">Platinum</div>
+          <h3 class="package-name">חבילת פלטינום</h3>
+          <p class="package-count">10 נרגילות רוסיות</p>
+          <div class="package-divider"></div>
+          <ul class="package-features">
+            <li>10 נרגילות רוסיות ברמה הגבוהה ביותר</li>
+            <li>טבק פרימיום רוסי ממגוון החברות המובילות</li>
+            <li>גחלים טבעיים חופשי כל הערב</li>
+            <li>ראשים מקצועיים וקלאוד לניהול חום</li>
+            <li>מפעיל צמוד עד 4 שעות</li>
+          </ul>
+          <a class="package-cta" href="https://wa.me/972546940927?text=שלום, אני מעוניין בחבילת פלטינום" target="_blank" rel="noopener">לפרטים והזמנה</a>
+          <p class="package-extra">תוספת ראש פרי - 75 ש"ח ליחידה</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="gallery-header reveal">
+        <p class="section-label">גלריה</p>
+        <div class="gold-line"></div>
+        <h2 class="section-title">האירועים <span class="gold">שלנו</span></h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item g1 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="עמדת נרגילה יוקרתית באירוע - מלך הנרגילות" loading="lazy" width="600" height="420" />
+        </div>
+        <div class="gallery-item g2 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/4de903bb7_653874873_18026760365641252_821565959197650974_n.jpg" alt="אירוע עם נרגילות פרימיום - מלך הנרגילות" loading="lazy" width="400" height="420" />
+        </div>
+        <div class="gallery-item g3 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/3c8be8a2f_649816205_17988927716936044_1904915857456276637_n.jpg" alt="נרגילות מפוארות לאירוע" loading="lazy" width="300" height="420" />
+        </div>
+        <div class="gallery-item g4 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/f2283d6c0_Screenshot_20241015_122402_WhatsApp.jpg" alt="חבילת נרגילות לאירועים" loading="lazy" width="500" height="320" />
+        </div>
+        <div class="gallery-item g5 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/4de903bb7_653874873_18026760365641252_821565959197650974_n.jpg" alt="מפעיל נרגילה מקצועי" loading="lazy" width="400" height="320" />
+        </div>
+        <div class="gallery-item g6 reveal">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="נרגילה פרימיום בטבע" loading="lazy" width="400" height="320" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="container">
+      <h2>מהיום, אנחנו איתכם בכל אירוע</h2>
+      <p>באירוע שלכם תרגישו מלכים</p>
+      <a class="btn-dark" href="https://wa.me/972546940927?text=שלום, אני מעוניין בפרטים על נרגילות לאירוע" target="_blank" rel="noopener">שלח הודעה בוואטסאפ</a>
+      <a class="cta-phone" href="tel:0546940927">054-694-0927</a>
+      <p class="cta-contact-name">אמיר | מלך הנרגילות לאירועים</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/6c751f1a6_.jpg" alt="לוגו מלך הנרגילות" width="64" height="64" />
+          <div class="footer-brand-name">מלך הנרגילות</div>
+          <div class="footer-brand-tagline">עמדות נרגילה פרימיום לאירועים</div>
+          <div class="footer-social" aria-label="רשתות חברתיות">
+            <a class="social-link" href="https://www.instagram.com/king_hookah_official/" target="_blank" rel="noopener" aria-label="אינסטגרם">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a class="social-link" href="https://wa.me/972546940927" target="_blank" rel="noopener" aria-label="וואטסאפ">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2a10 10 0 00-8.497 15.273L2 22l4.867-1.477A10 10 0 1012.004 2z"/></svg>
+            </a>
+            <a class="social-link" href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="פייסבוק">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            </a>
+            <a class="social-link" href="https://www.tiktok.com" target="_blank" rel="noopener" aria-label="טיקטוק">
+              <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <h4>צור קשר</h4>
+          <a href="tel:0546940927"><strong>054-694-0927</strong> | אמיר</a>
+          <a href="https://www.instagram.com/king_hookah_official/" target="_blank" rel="noopener">king_hookah_official@</a>
+          <a href="https://wa.me/972546940927?text=שלום, אני מעוניין בפרטים" target="_blank" rel="noopener">שלח הודעה בוואטסאפ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">2025 מלך הנרגילות לאירועים. כל הזכויות שמורות.</p>
+        <p class="footer-copy">עיצוב ופיתוח: שאפו דיגיטל</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a class="whatsapp-float" href="https://wa.me/972546940927?text=שלום, אני מעוניין בפרטים על נרגילות לאירוע" target="_blank" rel="noopener" aria-label="פתח שיחת וואטסאפ">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2a10 10 0 00-8.497 15.273L2 22l4.867-1.477A10 10 0 1012.004 2z"/></svg>
+  </a>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // HERO ANIMATIONS
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to('#heroEyebrow', { opacity: 1, duration: 0.8, delay: 0.3 })
+      .to('#heroTitle', { opacity: 1, y: 0, duration: 1 }, '-=0.4')
+      .to('#heroSubtitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
+      .to('#heroActions', { opacity: 1, duration: 0.6 }, '-=0.4');
+
+    // PARALLAX HERO BG
+    gsap.to('#heroBg', {
+      yPercent: 25,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // REVEAL ON SCROLL
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+
+    // NAV SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
