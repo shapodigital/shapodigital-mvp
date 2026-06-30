@@ -105,24 +105,18 @@
     .m-accent-n { font-size:3.5rem; font-weight:900; color:var(--gold); line-height:1; }
     .m-accent-l { font-size:0.85rem; color:var(--white); letter-spacing:0.1em; margin-top:4px; font-weight:500; }
 
-    /* ── EVENTS (MASONRY) ── */
-    .events-bg { background:transparent; position:relative; }
-    .ev-header { margin-bottom:50px; text-align:center; }
-    .ev-header .body-text { margin:0 auto; }
-    .ev-grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:16px; }
-    .ev-card { position:relative; will-change:transform, opacity; overflow:hidden; mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); }
-    .ev-card img, .ev-card video { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.8) contrast(1.1); transition:filter 0.5s, transform 0.8s var(--ease); }
-    .ev-card:hover img, .ev-card:hover video { filter:brightness(1.1) contrast(1.1); transform:scale(1.05); }
-    .ev-overlay { display:none; }
-    .ev-card:hover .ev-overlay { opacity:1; }
+    /* ── EVENTS (3D CAROUSEL) ── */
+    .events-bg { background:var(--black-2); position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+    .ev-header-wrap { position:absolute; top:12vh; left:0; width:100%; text-align:center; z-index:10; pointer-events:none; }
+    .ev-header-wrap .body-text { margin:0 auto; font-size:1.1rem; }
     
-    .ev1 { grid-column:1 / 8; height:450px; } 
-    .ev2 { grid-column:8 / 13; height:450px; }
-    .ev3 { grid-column:1 / 5; height:350px; }
-    .ev4 { grid-column:5 / 9; height:350px; }
-    .ev5 { grid-column:9 / 13; height:350px; }
-    .ev6 { grid-column:1 / 7; height:400px; }
-    .ev7 { grid-column:7 / 13; height:400px; }
+    .carousel-container { perspective:1200px; width:100%; height:60vh; display:flex; align-items:center; justify-content:center; margin-top:8vh; }
+    .carousel-tilt { transform-style:preserve-3d; transform:rotateX(-8deg); width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .carousel-3d { width:350px; height:480px; position:relative; transform-style:preserve-3d; will-change:transform; }
+    
+    .car-item { position:absolute; inset:0; border-radius:16px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.9), 0 0 20px rgba(223,184,108,0.2); border:1px solid rgba(223,184,108,0.3); -webkit-box-reflect:below 15px linear-gradient(transparent, transparent 70%, rgba(255,255,255,0.2)); background:#000; }
+    .car-item img, .car-item video { width:100%; height:100%; object-fit:cover; filter:brightness(0.7) contrast(1.1); transition:filter 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .car-item:hover img, .car-item:hover video { filter:brightness(1.1) contrast(1.2); }
 
     /* ── REVIEWS (GOOGLE STYLE) ── */
     .reviews-bg { background:transparent; position:relative; }
@@ -230,7 +224,11 @@
       .mosaic-wrap { height:500px; }
       .m-accent { left:20px; bottom:-20px; }
       
-      .ev1,.ev2,.ev3,.ev4,.ev5,.ev6,.ev7 { grid-column:1 / 13; height:300px; }
+      
+      
+      .carousel-3d { width:220px; height:320px; }
+      .ev-header-wrap { top:15vh; }
+
       .rev-card { width:calc(50% - 10px); }
       .pkg-grid { grid-template-columns:1fr; gap:24px; }
     }
@@ -240,7 +238,7 @@
       .hero-logo { width:220px; }
       .mosaic-wrap { height:400px; }
       .m-accent { display:none; }
-      .ev1,.ev2,.ev3,.ev4,.ev5,.ev6,.ev7 { height:260px; }
+      
       .rev-card { width:100%; }
     }
   </style>
@@ -326,26 +324,25 @@
 
   <div class="gd"></div>
 
-  <!-- EVENTS (MASONRY GRID) -->
+  <!-- EVENTS (3D CAROUSEL) -->
   <section class="sec events-bg" id="events">
-    <div class="wrap">
-      <div class="ev-header rv-txt">
-        <div class="lbl" style="justify-content:center;"><div class="lbl-line"></div><span>האירועים שלנו</span><div class="lbl-line"></div></div>
-        <h2 class="h2">חוויה בלתי נשכחת</h2>
-        <p class="body-text">הצצה קטנה לאירועים מרהיבים ולעמדות הפרימיום שאנחנו מרימים ברחבי הארץ.</p>
-      </div>
+    <div class="ev-header-wrap rv-txt">
+      <div class="lbl" style="justify-content:center;"><div class="lbl-line"></div><span>האירועים שלנו</span><div class="lbl-line"></div></div>
+      <h2 class="h2" style="font-size:clamp(2.5rem, 5vw, 4rem); text-shadow:0 10px 30px rgba(0,0,0,0.8);">חוויה בלתי נשכחת</h2>
+      <p class="body-text" style="color:var(--gold);">גללו כדי לסובב את גלריית האירועים שלנו ▾</p>
+    </div>
 
-      <div class="ev-grid">
-        <div class="ev-card ev1 ev-item">
-          <video autoplay muted loop playsinline preload="auto"><source src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/8e2b69a7e_fa295935a_20260624_200234.mp4" type="video/mp4" /></video>
-          <div class="ev-overlay"></div>
+    <div class="carousel-container">
+      <div class="carousel-tilt">
+        <div class="carousel-3d" id="car3d">
+          <div class="car-item"><video autoplay muted loop playsinline preload="auto"><source src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/8e2b69a7e_fa295935a_20260624_200234.mp4" type="video/mp4" /></video></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/b9507794f_734d964ad_20260624_212601.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/32cdf6b22_e9e3d07b0_20260624_200656.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/6b548397a_de64a3ace_20250908_2239182.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1519c09ee_8de40d0ad_20241010_234735.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1fc091686_07014c892_20250908_2239181.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
+          <div class="car-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1215455bf_d3ca4788e_20250908_223918.jpg" alt="אירוע נרגילות" loading="lazy" /></div>
         </div>
-        <div class="ev-card ev2 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/b9507794f_734d964ad_20260624_212601.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
-        <div class="ev-card ev3 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/32cdf6b22_e9e3d07b0_20260624_200656.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
-        <div class="ev-card ev4 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/6b548397a_de64a3ace_20250908_2239182.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
-        <div class="ev-card ev5 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1519c09ee_8de40d0ad_20241010_234735.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
-        <div class="ev-card ev6 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1fc091686_07014c892_20250908_2239181.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
-        <div class="ev-card ev7 ev-item"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/1215455bf_d3ca4788e_20250908_223918.jpg" alt="אירוע נרגילות" loading="lazy" /><div class="ev-overlay"></div></div>
       </div>
     </div>
   </section>
