@@ -83,9 +83,10 @@
     .h2 { font-size:clamp(2.2rem,4vw,3.5rem); font-weight:800; line-height:1.1; margin-bottom:16px; }
     .body-text { font-size:1.1rem; font-weight:300; color:var(--white-60); line-height:1.7; max-width:700px; }
 
-    /* ── ABOUT ── */
-    .about-bg { background:transparent; }
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    /* ── ABOUT (3D DYNAMIC PORTRAITS) ── */
+    .about-bg { background:transparent; overflow:hidden; }
+    .about-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; align-items:center; }
+    
     .about-text { padding-right:20px; }
     .feat-list { margin-top:40px; display:flex; flex-direction:column; gap:24px; border-top:1px solid rgba(223,184,108,.15); padding-top:32px; }
     .feat-item { display:flex; align-items:flex-start; gap:16px; will-change:transform, opacity; }
@@ -93,17 +94,38 @@
     .feat-content h4 { font-size:1.1rem; font-weight:600; color:var(--white); margin-bottom:4px; }
     .feat-content p { font-size:0.95rem; font-weight:300; color:var(--white-60); line-height:1.5; }
     
-    .mosaic-wrap { position:relative; display:grid; grid-template-columns:repeat(12, 1fr); grid-template-rows:repeat(12, 1fr); gap:12px; height:640px; }
-    .m-item { position:relative; overflow:hidden; will-change:transform; mask-image: radial-gradient(circle at center, black 60%, transparent 100%); -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%); }
-    .m-item img { width:100%; height:120%; object-fit:cover; display:block; filter:brightness(0.9) contrast(1.1); transform:translateY(-10%); will-change:transform; }
-    .m-item:hover img { filter:brightness(1.1); }
-    .m1 { grid-column:1 / 8; grid-row:1 / 8; }
-    .m2 { grid-column:8 / 13; grid-row:2 / 7; }
-    .m3 { grid-column:2 / 7; grid-row:8 / 13; }
-    .m4 { grid-column:7 / 13; grid-row:7 / 13; }
-    .m-accent { position:absolute; bottom:30px; left:-30px; background:rgba(10,10,10,0.8); backdrop-filter:blur(10px); border:1px solid var(--gold); padding:24px 32px; border-radius:12px; z-index:10; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.5); will-change:transform, opacity; }
-    .m-accent-n { font-size:3.5rem; font-weight:900; color:var(--gold); line-height:1; }
-    .m-accent-l { font-size:0.85rem; color:var(--white); letter-spacing:0.1em; margin-top:4px; font-weight:500; }
+    /* 3D Portraits Area */
+    .about-3d-scene { perspective:1000px; width:100%; height:600px; position:relative; display:flex; align-items:center; justify-content:center; }
+    .about-3d-wrap { position:relative; width:100%; height:100%; transform-style:preserve-3d; }
+    
+    .p-card { 
+      position:absolute; 
+      border-radius:24px; 
+      overflow:hidden; 
+      box-shadow:0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(223,184,108,0.15); 
+      border:1px solid rgba(255,255,255,0.1); 
+      will-change:transform; 
+      transform-style:preserve-3d;
+      background:var(--black);
+    }
+    .p-card img, .p-card video { width:100%; height:100%; object-fit:cover; filter:brightness(0.85) contrast(1.1); transform:translateZ(1px); } /* translateZ fixes Safari render glitch */
+    
+    /* Layout coordinates */
+    .p-card-1 { width:240px; height:340px; top:5%; right:10%; z-index:1; transform:translateZ(-100px) rotateY(-15deg); }
+    .p-card-2 { width:280px; height:400px; top:25%; right:45%; z-index:3; transform:translateZ(50px) rotateY(5deg); border-color:rgba(223,184,108,0.4); }
+    .p-card-3 { width:220px; height:300px; bottom:5%; right:5%; z-index:2; transform:translateZ(0px) rotateY(-5deg); }
+    .p-card-4 { width:200px; height:280px; top:15%; right:80%; z-index:1; transform:translateZ(-50px) rotateY(15deg); }
+
+    /* Interactive floating badge */
+    .p-badge-3d {
+      position:absolute; bottom:15%; right:70%; z-index:5;
+      background:rgba(10,10,10,0.8); backdrop-filter:blur(10px);
+      border:1px solid var(--gold); border-radius:16px;
+      padding:20px 30px; text-align:center;
+      transform:translateZ(80px); box-shadow:0 20px 40px rgba(0,0,0,0.6);
+    }
+    .p-badge-3d .num { font-size:3rem; font-weight:900; color:var(--gold); line-height:1; text-shadow:0 5px 15px rgba(223,184,108,0.4); }
+    .p-badge-3d .txt { font-size:0.9rem; color:var(--white); font-weight:500; margin-top:5px; }
 
     /* ── EVENTS (3D CAROUSEL) ── */
     .events-bg { background:var(--black-2); position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
@@ -136,8 +158,6 @@
     .rev-stars svg { width:16px; height:16px; fill:#FBBC04; }
     .rev-text { font-family:sans-serif; font-size:0.9rem; line-height:1.5; color:#3C4043; }
 
-    
-    
     /* ── PACKAGES (MATCHING UPLOADED DESIGN) ── */
     .packages-master { position:relative; background:var(--black); padding:100px 24px 150px; overflow:hidden; }
     .pkg-ambient-bg { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(40,40,40,0.6), var(--black)); opacity:0.9; pointer-events:none; }
@@ -209,19 +229,6 @@
     
     .fruit-img { position:absolute; bottom:-45px; right:-20px; height:240px; mix-blend-mode:lighten; pointer-events:none; }
 
-    @media(max-width:768px){
-      .pkg-main-title { font-size:3rem; margin-bottom:120px; }
-      .pkg-box { padding:70px 15px 40px; margin-bottom:80px; }
-      .pkg-box-title { font-size:1.5rem; }
-      .pkg-box-content { font-size:1.1rem; }
-      .pkg-box-img { right:50%; transform:translate(50%, -80%); height:180px; top:0; }
-      .pkg-box-badge { left:50%; transform:translate(-50%, 50%); width:max-content; }
-      .phone-wrap { flex-direction:column; gap:4px; }
-      .phone-label { text-align:center; font-size:1.2rem; }
-      .phone-number { font-size:3rem; }
-      .pkg-bottom-cta { flex-direction:column; margin-top:80px; padding-bottom:120px; }
-      .fruit-img { position:absolute; right:50%; bottom:-30px; transform:translateX(50%); height:160px; }
-    }
     /* ── FOOTER ── */
     footer { background:var(--black-2); border-top:1px solid rgba(223,184,108,.1); padding:60px 24px 30px; text-align:center; position:relative; z-index:5; }
     .foot-logo { width:140px; margin:0 auto 24px; display:block; }
@@ -242,24 +249,34 @@
       .nav-tel-icon svg { width:28px; height:28px; fill:currentColor; }
       
       .about-grid { grid-template-columns:1fr; gap:60px; }
-      .mosaic-wrap { height:500px; }
-      .m-accent { left:20px; bottom:-20px; }
-      
-      
+      .about-3d-scene { height:500px; }
+      .p-card-1 { width:180px; height:260px; }
+      .p-card-2 { width:220px; height:320px; }
+      .p-card-3 { width:160px; height:240px; }
+      .p-card-4 { width:140px; height:200px; }
       
       .carousel-3d { width:220px; height:320px; }
       .ev-header-wrap { top:15vh; }
-
       .rev-card { width:calc(50% - 10px); }
-      .pkg-grid { grid-template-columns:1fr; gap:24px; }
+    }
+    @media(max-width:768px){
+      .pkg-main-title { font-size:3rem; margin-bottom:120px; }
+      .pkg-box { padding:70px 15px 40px; margin-bottom:80px; }
+      .pkg-box-title { font-size:1.5rem; }
+      .pkg-box-content { font-size:1.1rem; }
+      .pkg-box-img { right:50%; transform:translate(50%, -80%); height:180px; top:0; }
+      .pkg-box-badge { left:50%; transform:translate(-50%, 50%); width:max-content; }
+      .phone-wrap { flex-direction:column; gap:4px; }
+      .phone-label { text-align:center; font-size:1.2rem; }
+      .phone-number { font-size:3rem; }
+      .pkg-bottom-cta { flex-direction:column; margin-top:80px; padding-bottom:120px; }
+      .fruit-img { position:absolute; right:50%; bottom:-30px; transform:translateX(50%); height:160px; }
     }
     @media(max-width:640px){
       .sec { padding:80px 20px; }
       .hero-h1 { font-size:2.4rem; }
       .hero-logo { width:220px; }
-      .mosaic-wrap { height:400px; }
-      .m-accent { display:none; }
-      
+      .about-3d-scene { height:400px; }
       .rev-card { width:100%; }
     }
   </style>
@@ -313,10 +330,11 @@
 
   <div class="gd"></div>
 
-  <!-- ABOUT -->
+  <!-- ABOUT (3D DYNAMIC PORTRAITS) -->
   <section class="sec about-bg" id="about">
     <div class="wrap">
       <div class="about-grid">
+        
         <div class="about-text">
           <div class="lbl rv-txt"><div class="lbl-line"></div><span>מי אנחנו</span></div>
           <h2 class="h2 rv-txt">חוויה פרימיום<br>בהתאמה אישית</h2>
@@ -329,16 +347,22 @@
             <div class="feat-item"><div class="feat-num">05</div><div class="feat-content"><h4>מפעיל צמוד לאורך האירוע</h4><p>שירות מקצועי ואישי עד 4 שעות אירוע</p></div></div>
           </div>
         </div>
-        <div class="mosaic-wrap">
-          <div class="m-item m1"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="נרגילה 1" class="plx" data-speed="0.1" /></div>
-          <div class="m-item m2"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/d3e2a2b8e_premium_hookah.jpg" alt="נרגילה פרימיום" class="plx" data-speed="-0.15" /></div>
-          <div class="m-item m3"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/f2283d6c0_Screenshot_20241015_122402_WhatsApp.jpg" alt="נרגילה 2" class="plx" data-speed="0.2" /></div>
-          <div class="m-item m4"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/ce8f6567d_fruit_hookah.webp" alt="ראש פרי" class="plx" data-speed="-0.1" /></div>
-          <div class="m-accent">
-            <div class="m-accent-n">10</div>
-            <div class="m-accent-l">עמדות לאירוע</div>
+
+        <div class="about-3d-scene" id="aboutScene">
+          <div class="about-3d-wrap" id="aboutWrap">
+            <!-- Floating cards -->
+            <div class="p-card p-card-1"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="נרגילה" /></div>
+            <div class="p-card p-card-2"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/d3e2a2b8e_premium_hookah.jpg" alt="נרגילה יוקרתית" /></div>
+            <div class="p-card p-card-3"><video autoplay muted loop playsinline><source src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/8e2b69a7e_fa295935a_20260624_200234.mp4" type="video/mp4" /></video></div>
+            <div class="p-card p-card-4"><img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/ce8f6567d_fruit_hookah.webp" alt="ראש פרי" /></div>
+            
+            <div class="p-badge-3d">
+              <div class="num">10</div>
+              <div class="txt">עמדות לאירוע</div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -379,7 +403,7 @@
       </div>
 
       <div class="rev-grid">
-
+        
         <div class="rev-card rev-item">
           <div class="rev-top">
             <div class="rev-avatar" style="background:#4285F4;">מ</div>
@@ -390,11 +414,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">וואוווו אין מילים בפי איזה אווירה איזה שירות איזה טעמים, שירות מדהים מעל למצופה ומחירים נוחים לכל כיס. אין ספק שאשכור את שירותכם שוב 🙏❤</div>
         </div>
@@ -409,11 +429,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">הזמנו אותם לחתונה שלנו והם פשוט שידרגו את כל האירוע. הכל הגיע מסודר, אלגנטי ונקי. נרגילות פרימיום ברמה הכי גבוהה שנתקלתי בה.</div>
         </div>
@@ -428,11 +444,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">שירות מספר 1 בארץ! אמיר בחור זהב, דאג לכל דבר קטן במהלך המסיבה. הנרגילות פשוט מושלמות, חוויה אחרת לגמרי.</div>
         </div>
@@ -447,11 +459,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">צוות מקצועי ברמות, הגיעו בזמן עם ציוד חדש ומצוחצח. האורחים לא הפסיקו להחמיא על הטעמים המיוחדים. מומלץ בחום!</div>
         </div>
@@ -466,11 +474,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">הזמנתי את מלך הנרגילות למסיבת רווקים של חבר, וזו הייתה ההחלטה הכי טובה שעשיתי. אמיר תותח, פינק אותנו בלי סוף. תודה!</div>
         </div>
@@ -485,11 +489,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">רמה אחת מעל כולם. הנרגילות הרוסיות פשוט מדהימות והטבק איכותי בטירוף. לא הייתי צריך להתעסק בכלום, המפעיל דאג לגחלים כל הערב.</div>
         </div>
@@ -504,11 +504,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">ואוו, איזה שדרוג לחתונה שלנו! העמדה הייתה מהממת, מעוצבת בטוב טעם. כולם ישבו מסביב לעמדת הנרגילות. תודה לאמיר והצוות!</div>
         </div>
@@ -523,11 +519,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">השירות הכי טוב שקיבלתי. אמיר ענה לכל שאלה לפני האירוע, הגיעו מתוקתקים, והנרגילות היו פשוט הצגה. טעמים נדירים.</div>
         </div>
@@ -542,11 +534,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">איכות ללא פשרות. הזמנו לחברת הייטק לאירוע חברה, כולם עפו על זה. מקצועיות שיא, עמדות נקיות ומסודרות.</div>
         </div>
@@ -561,11 +549,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">אלוף אמיתי! אין אירוע שאנחנו לא לוקחים את אמיר. תמיד מפנק מכל הלב, ציוד פרימיום ותמיד עם חיוך.</div>
         </div>
@@ -580,11 +564,7 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">מלך אמיתי. עשה לנו אירוע פצצה בווילה, נרגילות נקיות בטירוף, ראשים מיוחדים שמוציאים עננים של עשן. חוויה של VIP.</div>
         </div>
@@ -599,22 +579,17 @@
             <svg class="rev-google-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
           <div class="rev-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <div class="rev-text">חיפשתי הרבה זמן שירות נרגילות לאירוע שלא נראה שכונתי. מלך הנרגילות הביאו עמדה סופר אלגנטית ומכובדת, שירות פרימיום במלוא מובן המילה.</div>
         </div>
-</div>
+
+      </div>
     </div>
   </section>
 
   <div class="gd"></div>
 
-  
-  
   <!-- PACKAGES (MATCHING UPLOADED DESIGN) -->
   <section class="sec packages-master" id="packages">
     <div class="pkg-ambient-bg"></div>
@@ -719,15 +694,49 @@
     gsap.utils.toArray('.rv-txt').forEach(el => { gsap.fromTo(el, { opacity:0, y:40 }, { opacity:1, y:0, duration:1.2, ease:'power3.out', scrollTrigger: { trigger:el, start:'top 85%', toggleActions:'play none none none' } }); });
     gsap.from('.feat-item', { scrollTrigger: { trigger: '.feat-list', start: 'top 80%' }, y: 50, opacity: 0, stagger: 0.15, duration: 1, ease: 'power3.out' });
 
-    /* ── MOSAIC PARALLAX ── */
-    gsap.from('.m-accent', { scrollTrigger: { trigger: '.mosaic-wrap', start: 'top 80%' }, scale: 0.8, opacity: 0, rotation: -5, duration: 1.5, ease: 'elastic.out(1, 0.5)' });
-    gsap.utils.toArray('.plx').forEach(img => { const speed = img.getAttribute('data-speed'); gsap.to(img, { yPercent: speed * 100, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }); });
+    /* ── 3D PORTRAITS (MOUSE INTERACTION) ── */
+    const scene = document.getElementById('aboutScene');
+    const wrap = document.getElementById('aboutWrap');
+    if(scene && wrap) {
+      scene.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20; 
+        const y = (e.clientY / window.innerHeight - 0.5) * -20;
+        gsap.to(wrap, { rotationY: x, rotationX: y, duration: 1, ease: 'power2.out' });
+      });
+      scene.addEventListener('mouseleave', () => {
+        gsap.to(wrap, { rotationY: 0, rotationX: 0, duration: 1.5, ease: 'power2.out' });
+      });
+      // Initial staggered entrance
+      gsap.from('.p-card', {
+        scrollTrigger: { trigger: '.about-bg', start: 'top 70%' },
+        y: 150, opacity: 0, rotationY: 45, rotationZ: -10, stagger: 0.2, duration: 1.5, ease: 'back.out(1.2)'
+      });
+    }
 
-    /* ── EVENTS & REVIEWS MASONRY (STAGGER) ── */
-    gsap.from('.ev-item', { scrollTrigger: { trigger: '.ev-grid', start: 'top 75%' }, y: 100, opacity: 0, scale: 0.9, stagger: 0.15, duration: 1.2, ease: 'power4.out' });
+    /* ── 3D CAROUSEL SETUP & SCROLL ── */
+    const carItems = document.querySelectorAll('.car-item');
+    const numCarItems = carItems.length;
+    const carAngle = 360 / numCarItems;
+    function setupCarousel() {
+      const isMobile = window.innerWidth < 768;
+      const cardWidth = isMobile ? 220 : 350;
+      const tz = Math.round((cardWidth / 2) / Math.tan(Math.PI / numCarItems)) + (isMobile ? 30 : 60);
+      carItems.forEach((item, i) => {
+        item.style.transform = `rotateY(${i * carAngle}deg) translateZ(${tz}px)`;
+      });
+    }
+    setupCarousel();
+    window.addEventListener('resize', setupCarousel);
+
+    gsap.to('#car3d', {
+      rotationY: -360,
+      ease: 'none',
+      scrollTrigger: { trigger: '#events', start: 'top top', end: '+=2500', pin: true, scrub: 1 }
+    });
+
+    /* ── REVIEWS (STAGGER) ── */
     gsap.from('.rev-item', { scrollTrigger: { trigger: '.rev-grid', start: 'top 75%' }, y: 60, opacity: 0, scale: 0.95, stagger: 0.08, duration: 0.8, ease: 'back.out(1.2, 0.7)' });
 
-    
     /* ── NAVBAR ── */
     window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); }, {passive:true});
   </script>
