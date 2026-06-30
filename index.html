@@ -183,15 +183,16 @@
     .pkg-row:last-child { margin-bottom:0; }
 
     /* image side */
-    .pkg-img-side { position:relative; overflow:hidden; background:#000; }
+    .pkg-img-side { position:relative; overflow:hidden; background:#000; isolation:isolate; }
     .pkg-img-side img {
       width:100%; height:100%; object-fit:cover;
-      filter:brightness(0.28) saturate(0.6);
-      mask-image:radial-gradient(ellipse 80% 90% at 50% 50%, black 40%, transparent 100%);
-      -webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 50%, black 40%, transparent 100%);
+      filter:brightness(0.22) contrast(1.4) saturate(0.3);
+      mix-blend-mode:multiply;
+      mask-image:radial-gradient(ellipse 70% 80% at 50% 45%, black 30%, transparent 85%);
+      -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 45%, black 30%, transparent 85%);
       transition:filter .6s var(--ease), transform .8s var(--ease);
     }
-    .pkg-row:hover .pkg-img-side img { filter:brightness(0.45) saturate(0.8); transform:scale(1.04); }
+    .pkg-row:hover .pkg-img-side img { filter:brightness(0.38) contrast(1.3) saturate(0.5); transform:scale(1.04); }
 
     /* card side */
     .pkg-card-side {
@@ -612,7 +613,7 @@
     <!-- גולד -->
     <div class="pkg-row pkg-r1">
       <div class="pkg-img-side">
-        <img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/d3e2a2b8e_premium_hookah.jpg" alt="נרגילת גולד" />
+        <img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/d3e2a2b8e_premium_hookah.jpg" alt="נרגילת גולד" style="filter:brightness(0.22) contrast(1.5) saturate(0.2); mix-blend-mode:multiply;" />
       </div>
       <div class="pkg-card-side">
         <div class="pkg-card-inner">
@@ -634,7 +635,7 @@
     <!-- פרימיום -->
     <div class="pkg-row featured flip pkg-r2">
       <div class="pkg-img-side">
-        <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="נרגילת פרימיום" />
+        <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="נרגילת פרימיום" style="filter:brightness(0.22) contrast(1.5) saturate(0.2); mix-blend-mode:multiply;" />
       </div>
       <div class="pkg-card-side">
         <div class="pkg-card-inner">
@@ -657,7 +658,7 @@
     <!-- פלטינום -->
     <div class="pkg-row pkg-r3">
       <div class="pkg-img-side">
-        <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/df4f5a043_649816205_17988927716936044_1904915857456276637_n.jpg" alt="נרגילת פלטינום" />
+        <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/df4f5a043_649816205_17988927716936044_1904915857456276637_n.jpg" alt="נרגילת פלטינום" style="filter:brightness(0.22) contrast(1.5) saturate(0.2); mix-blend-mode:multiply;" />
       </div>
       <div class="pkg-card-side">
         <div class="pkg-card-inner">
