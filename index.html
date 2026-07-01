@@ -1412,6 +1412,39 @@
       border-radius: 20px; padding: 4px 12px;
     }
 
+    /* שורת סטטיסטיקות: ותק / סניפים / אירועים */
+    .netx-stats {
+      display: flex; justify-content: center; align-items: stretch;
+      gap: 18px; flex-wrap: wrap; margin: 30px auto 46px; max-width: 720px;
+    }
+    .netx-stat {
+      flex: 1 1 160px; min-width: 140px;
+      background: linear-gradient(160deg, rgba(197,160,80,0.10), rgba(8,8,8,0.4));
+      border: 1px solid rgba(197,160,80,0.28);
+      border-radius: 16px; padding: 20px 14px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      transition: transform .35s ease, border-color .35s ease;
+    }
+    .netx-stat:hover { transform: translateY(-4px); border-color: rgba(197,160,80,0.55); }
+    .netx-stat-num {
+      font-size: clamp(30px, 4vw, 42px); font-weight: 900; line-height: 1;
+      background: linear-gradient(180deg, #f7e8bd, #c5a050 55%, #7a5f26);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .netx-stat-lbl {
+      font-size: 13px; letter-spacing: 0.5px;
+      color: rgba(232,224,208,0.75);
+      line-height: 1.4;
+    }
+    @media (max-width: 640px) {
+      .netx-stats { gap: 12px; margin: 22px auto 34px; }
+      .netx-stat { padding: 16px 10px; min-width: 100px; }
+      .netx-stat-lbl { font-size: 12px; }
+    }
+
     /* מונה ענק */
     .netx-counter { margin-bottom: 34px; }
     .netx-big {
@@ -1938,9 +1971,25 @@
       </h2>
 
       <p class="netx-sub">
-        חנות אחת קטנה בנתניה הפכה לרשת שלמה. היום מלך הנרגילות נמצא איפה שאתם 
-        אותו טעם, אותה אווירה, אותה נרגילה שכולם מדברים עליה.
+        20 שנה שאנחנו כבר איתכם. חנות אחת קטנה בנתניה הפכה לרשת שכל הארץ מכירה — 
+        ומהדרך הזאת נולד גם השירות שהבאתם לאירועים שלכם. אותו טעם, אותה אווירה, 
+        אותה נרגילה שכולם מדברים עליה — עכשיו גם בחתונה, בטקס, במסיבת יום הולדת ובכל אירוע חברה.
       </p>
+
+      <div class="netx-stats">
+        <div class="netx-stat">
+          <div class="netx-stat-num">20</div>
+          <div class="netx-stat-lbl">שנות ותק ואמינות</div>
+        </div>
+        <div class="netx-stat">
+          <div class="netx-stat-num">7</div>
+          <div class="netx-stat-lbl">סניפים בפריסה ארצית</div>
+        </div>
+        <div class="netx-stat">
+          <div class="netx-stat-num">∞</div>
+          <div class="netx-stat-lbl">אירועים שהפכנו לבלתי נשכחים</div>
+        </div>
+      </div>
 
       <!-- מפת ישראל מרומזת עם נקודות סניפים -->
       <div class="netx-map">
@@ -1963,7 +2012,7 @@
         <div class="netx-big-lbl">סניפים · פריסה ארצית</div>
       </div>
 
-      <p class="netx-foot">מנתניה ועד כל הארץ מלך אחד. מלך הנרגילות.</p>
+      <p class="netx-foot">20 שנה, 7 סניפים, אירוע אחד בכל פעם — מנתניה ועד כל הארץ מלך אחד. מלך הנרגילות.</p>
     </div>
   </section>
 
