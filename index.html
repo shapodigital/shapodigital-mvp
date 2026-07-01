@@ -46,7 +46,17 @@
     .nav-wa-btn { display:flex; align-items:center; gap:8px; background:var(--gold); color:var(--black); padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all .3s; }
     .nav-wa-btn:hover { background:#EED18D; transform:translateY(-1px); }
     .nav-wa-btn svg { width:18px; height:18px; fill:currentColor; flex-shrink:0; }
-    @media(max-width:1024px){ nav { padding:14px 20px; } .nav-links { display:none; } nav.scrolled { padding:10px 20px; } }
+    @media(max-width:1024px){
+      nav { padding:14px 20px; }
+      .nav-links { display:none; }
+      nav.scrolled { padding:10px 20px; }
+      .hero-logo { width:180px; }
+    }
+    @media(max-width:600px){
+      .cta-strip-inner { padding:48px 20px; }
+      .float-btns { left:14px; bottom:18px; }
+      .float-btn { width:46px; height:46px; }
+    }
 
     /* ── FLOATING BTNS ── */
     .float-btns { position:fixed; left:20px; bottom:24px; z-index:200; display:flex; flex-direction:column; gap:12px; }
@@ -75,7 +85,15 @@
     .hero-stat { text-align:center; }
     .hero-stat-num { font-size:2.4rem; font-weight:900; color:var(--gold); line-height:1; }
     .hero-stat-label { font-size:0.8rem; color:var(--white-60); font-weight:300; margin-top:4px; letter-spacing:0.05em; }
-    @media(max-width:640px){ .hero-stats { gap:30px; bottom:30px; } .hero-stat-num { font-size:1.8rem; } }
+    @media(max-width:640px){
+      .hero-stats { gap:20px; bottom:20px; flex-wrap:wrap; padding:0 12px; }
+      .hero-stat-num { font-size:1.6rem; }
+      .hero-stat-label { font-size:0.7rem; }
+      .hero-h1 { font-size:2rem; }
+      .hero-sub { font-size:1rem; }
+      .hero-btns { flex-direction:column; gap:10px; align-items:center; }
+      .btn-gold { width:100%; max-width:280px; justify-content:center; }
+    }
 
     /* ── DIVIDER ── */
     .gd { width:100%; height:1px; background:linear-gradient(to right,transparent,var(--gold-line),var(--gold),var(--gold-line),transparent); position:relative; z-index:5; }
@@ -120,32 +138,36 @@
     .why-icon svg { width:22px; height:22px; fill:var(--gold); }
     .why-card h3 { font-size:1.25rem; font-weight:700; color:var(--white); margin-bottom:12px; line-height:1.3; }
     .why-card p { font-size:0.95rem; font-weight:300; color:var(--white-60); line-height:1.7; }
-    @media(max-width:900px){ .why-grid { grid-template-columns:1fr; } }
+    @media(max-width:900px){ .why-grid { grid-template-columns:1fr; } .why-card { padding:36px 24px; } }
 
     /* ── EVENTS (3D CAROUSEL) ── */
-    .events-bg { background:var(--black); position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+    .events-bg { background:var(--black); position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:visible; }
     .ev-header-wrap { position:absolute; top:10vh; left:0; width:100%; text-align:center; z-index:10; pointer-events:none; padding:0 24px; }
-    .carousel-container { perspective:1200px; width:100%; height:60vh; display:flex; align-items:center; justify-content:center; margin-top:6vh; }
-    .carousel-tilt { transform-style:preserve-3d; transform:rotateX(-7deg); width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-    .carousel-3d { width:340px; height:460px; position:relative; transform-style:preserve-3d; will-change:transform; }
-    /* Fallback before JS: show first item */
-    .carousel-3d .car-item:not(:first-child) { opacity:0; }
-    .carousel-3d.js-ready .car-item { opacity:1; }
+    .carousel-container { perspective:1400px; width:100%; height:70vh; min-height:520px; display:flex; align-items:center; justify-content:center; margin-top:4vh; overflow:visible; }
+    .carousel-tilt { transform-style:preserve-3d; transform:rotateX(-5deg); width:100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:visible; }
+    
+    /* All items visible */
     .car-item { position:absolute; inset:0; border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.9); border:1px solid rgba(223,184,108,0.25); -webkit-box-reflect:below 12px linear-gradient(transparent,transparent 72%,rgba(255,255,255,0.15)); }
     .car-item img,.car-item video { width:100%; height:100%; object-fit:cover; filter:brightness(0.28) saturate(0.6); transition:filter .4s; will-change:filter; content-visibility:auto; }
     .car-item:hover img,.car-item:hover video { filter:brightness(0.5) saturate(0.8); }
-    @media(max-width:768px){ .carousel-3d { width:200px; height:300px; } }
+    @media(max-width:768px){
+      .carousel-3d { width:240px; height:320px; }
+      .carousel-container { height:60vh; min-height:380px; }
+      .events-bg { height:auto; min-height:100vh; }
+      .ev-header-wrap { position:relative; top:auto; padding:60px 24px 20px; }
+      .carousel-container { margin-top:0; }
+    }
 
     /* ── REVIEWS (MARQUEE) ── */
-    .reviews-bg { background:var(--black); overflow:hidden; }
+    .reviews-bg { background:var(--black); overflow:hidden; position:relative; }
     .reviews-bg::before, .reviews-bg::after { content:''; position:absolute; top:0; bottom:0; width:200px; z-index:3; pointer-events:none; }
     .reviews-bg::before { left:0; background:linear-gradient(to right,var(--black) 35%,transparent); }
     .reviews-bg::after  { right:0; background:linear-gradient(to left,var(--black) 35%,transparent); }
     .rev-header { text-align:center; margin-bottom:56px; padding:0 24px; position:relative; z-index:5; }
     .rev-track-wrap { overflow:hidden; position:relative; padding:20px 0; }
-    .rev-track { display:flex; gap:20px; width:max-content; animation:revScroll 55s linear infinite; cursor:grab; user-select:none; }
+    .rev-track { display:flex; gap:20px; width:max-content; animation:revScroll 80s linear infinite; cursor:grab; user-select:none; }
     .rev-track:hover { animation-play-state:paused; }
-    .rev-track.dragging { animation-play-state:paused; cursor:grabbing; }
+    .rev-track.dragging { animation-play-state:paused; cursor:grabbing; will-change:transform; }
     @keyframes revScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
     .rev-card { flex-shrink:0; width:340px; background:#fff; color:#202124; padding:26px 28px; border-radius:14px; box-shadow:0 12px 36px rgba(0,0,0,0.5); }
     .rev-card:hover { transform:translateY(-6px); transition:transform .3s; }
@@ -238,6 +260,339 @@
     .foot-bottom p { font-size:0.8rem; color:var(--white-35); }
     .foot-bottom a { color:var(--gold); text-decoration:none; font-size:0.8rem; }
     @media(max-width:800px){ .foot-top { grid-template-columns:1fr; gap:36px; } }
+
+    /* ── ACCESSIBILITY ── */
+    .acc-btn { position:fixed; left:20px; top:50%; transform:translateY(-50%); z-index:300; width:46px; height:46px; background:var(--gold); border:none; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.5); transition:transform .3s,box-shadow .3s; }
+    .acc-btn:hover { transform:translateY(-50%) scale(1.1); box-shadow:0 8px 24px rgba(0,0,0,0.6); }
+    .acc-btn svg { width:24px; height:24px; fill:var(--black); }
+    .acc-panel { position:fixed; left:72px; top:50%; transform:translateY(-50%); z-index:299; background:rgba(10,10,10,0.97); backdrop-filter:blur(20px); border:1px solid var(--gold-line); border-radius:16px; padding:24px 20px; min-width:230px; display:none; box-shadow:0 20px 50px rgba(0,0,0,0.8); }
+    .acc-panel.open { display:block; }
+    .acc-panel h3 { font-size:0.85rem; letter-spacing:0.15em; color:var(--gold); text-transform:uppercase; margin-bottom:18px; font-weight:600; }
+    .acc-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:12px; }
+    .acc-row label { font-size:0.9rem; color:var(--white-60); font-weight:300; }
+    .acc-row button { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:var(--white); border-radius:7px; padding:6px 14px; cursor:pointer; font-size:0.85rem; font-family:inherit; transition:all .2s; white-space:nowrap; }
+    .acc-row button:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
+    .acc-row button.active { background:var(--gold); color:var(--black); border-color:var(--gold); }
+    .acc-reset { width:100%; margin-top:6px; background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--white-60); border-radius:7px; padding:8px; cursor:pointer; font-size:0.82rem; font-family:inherit; transition:all .2s; }
+    .acc-reset:hover { border-color:var(--gold); color:var(--gold); }
+    /* High contrast mode */
+    body.acc-contrast { filter:contrast(1.5) brightness(1.15); }
+    /* Large text */
+    body.acc-large * { font-size:115% !important; }
+    /* Reduce motion */
+    body.acc-no-motion *, body.acc-no-motion *::before, body.acc-no-motion *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+    /* Focus indicators */
+    body.acc-focus *:focus { outline:3px solid var(--gold) !important; outline-offset:3px !important; }
+    /* Dyslexia font */
+    body.acc-dyslexia { font-family:Arial,sans-serif !important; letter-spacing:0.05em; word-spacing:0.1em; line-height:1.9 !important; }
+    /* Underline links */
+    body.acc-links a { text-decoration:underline !important; }
+    @media(max-width:768px){
+      .acc-btn { left:14px; top:auto; bottom:90px; transform:none; }
+      .acc-btn:hover { transform:scale(1.1); }
+      .acc-panel { left:66px; top:auto; bottom:80px; transform:none; min-width:200px; }
+    }
+
+    /* ── PRIVACY MODAL ── */
+    .priv-overlay { position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; padding:20px; }
+    .priv-overlay.open { display:flex; }
+    .priv-box { background:#111; border:1px solid var(--gold-line); border-radius:18px; max-width:720px; width:100%; max-height:85vh; overflow-y:auto; padding:48px 44px; position:relative; }
+    .priv-box::-webkit-scrollbar { width:3px; } .priv-box::-webkit-scrollbar-thumb { background:var(--gold-dim); }
+    .priv-close { position:absolute; top:20px; left:20px; background:none; border:1px solid rgba(255,255,255,0.1); color:var(--white); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+    .priv-close:hover { border-color:var(--gold); color:var(--gold); }
+    .priv-box h2 { font-size:1.6rem; font-weight:800; margin-bottom:8px; }
+    .priv-box .priv-date { font-size:0.82rem; color:var(--white-60); margin-bottom:28px; }
+    .priv-box h3 { font-size:1rem; font-weight:700; color:var(--gold); margin:22px 0 8px; }
+    .priv-box p, .priv-box li { font-size:0.93rem; color:var(--white-60); line-height:1.75; font-weight:300; }
+    .priv-box ul { padding-right:20px; margin-bottom:8px; }
+    .priv-box a { color:var(--gold); }
+    @media(max-width:600px){ .priv-box { padding:32px 20px; } }
+
+
+    /* ══ SCROLL GALLERY ══ */
+    .sg-header { text-align:center; padding:80px 24px 48px; }
+    .sg-wrapper { position:relative; width:100%; height:75vh; min-height:500px; overflow:hidden; background:#000; }
+    .sg-track { display:flex; height:100%; transition:transform 0.65s cubic-bezier(0.77,0,0.175,1); will-change:transform; transform:translateX(0); }
+    .sg-slide { flex:0 0 100%; width:100%; height:100%; position:relative; overflow:hidden; }
+    .sg-media { width:100%; height:100%; object-fit:cover; object-position:center; filter:brightness(0.75) saturate(0.85); display:block; }
+    .sg-vignette { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 30%, rgba(8,8,8,0.85) 100%); pointer-events:none; }
+    /* Arrows */
+    .sg-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:52px; height:52px; background:rgba(255,255,255,0.06); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.12); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; transition:all .25s; }
+    .sg-arrow:hover { background:var(--gold); border-color:var(--gold); color:#000; transform:translateY(-50%) scale(1.08); }
+    .sg-prev { left:24px; }
+    .sg-next { right:24px; }
+    .sg-arrow svg { width:22px; height:22px; }
+    /* Counter */
+    .sg-counter { position:absolute; top:20px; right:24px; font-size:0.78rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); font-weight:300; }
+    /* Dots */
+    .sg-dots { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
+    .sg-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.3); border:none; cursor:pointer; transition:all .3s; padding:0; }
+    .sg-dot.active { background:var(--gold); width:22px; border-radius:3px; }
+    /* Swipe hint on mobile */
+    @media(max-width:768px){
+      .sg-wrapper { height:65vh; min-height:380px; }
+      .sg-arrow { width:40px; height:40px; }
+      .sg-prev { left:12px; }
+      .sg-next { right:12px; }
+    }
+    /* ── PARALLAX ── */
+    .parallax-sec { position:relative; height:80vh; min-height:500px; overflow:hidden; display:flex; align-items:center; justify-content:center; z-index:5; }
+    .parallax-bg { position:absolute; inset:-30% 0; background-image:url("https://media.base44.com/images/public/6a4393fe152404712a5afe37/7002e0f2f_20241010_234801.jpg"); background-size:cover; background-position:center; filter:brightness(0.28) saturate(0.6); will-change:transform; }
+    .parallax-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.1) 50%, rgba(8,8,8,0.85) 100%); }
+    .parallax-content { position:relative; z-index:3; text-align:center; padding:0 24px; display:flex; flex-direction:column; align-items:center; }
+    .parallax-h2 { font-size:clamp(2rem,4.5vw,3.6rem); font-weight:900; line-height:1.1; margin:16px 0 18px; letter-spacing:-0.02em; }
+    .parallax-p { font-size:1.05rem; color:var(--white-60); font-weight:300; max-width:520px; line-height:1.7; }
+  
+    
+  
+    
+    /* Outer mask: fades entire grid edges into the dark background */
+    .gal-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,  rgba(8,8,8,1) 0%, transparent 6%, transparent 94%, rgba(8,8,8,1) 100%),
+        linear-gradient(to bottom, rgba(8,8,8,1) 0%, transparent 5%, transparent 90%, rgba(8,8,8,1) 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Wide: spans 2 cols */
+    .gi-wide { grid-column: span 2; }
+    /* Tall: spans 2 rows */
+    .gi-tall { grid-row: span 2; }
+    /* sq: 1×1 */
+    .gi-sq   { grid-column: span 1; }
+
+    .gi-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+
+    .gi-inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s;
+      will-change: transform;
+    }
+
+    /* Vignette overlay — hides rough edges, creates depth */
+    .gi-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 85% 85% at 50% 50%,
+        transparent 28%,
+        rgba(8,8,8,0.5) 62%,
+        rgba(8,8,8,0.9) 100%);
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.5s;
+    }
+
+    /* Gold shimmer line on hover */
+    .gi-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        transparent 30%,
+        rgba(223,184,108,0.06) 50%,
+        transparent 70%);
+      opacity: 0;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+
+    /* Bottom fade — blends image into dark bg */
+    .gi-inner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 65%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(8,8,8,0.78) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Side fade — lateral blending */
+    .gi-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(8,8,8,0.55) 0%,
+        transparent 22%,
+        transparent 78%,
+        rgba(8,8,8,0.55) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .gi:hover .gi-inner img {
+      transform: scale(1.07);
+      filter: brightness(1.08) contrast(1.05) saturate(1.1) !important;
+    }
+    .gi:hover .gi-vignette { opacity: 0.5; }
+    .gi:hover .gi-shine { opacity: 1; }
+
+    @media(max-width:900px){
+      .gal-grid {
+        grid-template-columns: repeat(2,1fr);
+        grid-auto-rows: 200px;
+      }
+      .gi-wide { grid-column: span 2; }
+      .gi-tall { grid-row: span 2; }
+    }
+    @media(max-width:520px){
+      .gal-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 160px;
+        gap: 4px;
+        padding: 0 4px;
+      }
+    }
+
+  
+    /* ══ LUXURY GALLERY ══ */
+    .gal-section {
+      background: #080808;
+      padding: 80px 0 100px;
+      position: relative;
+    }
+    .gal-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+    .gal-header { text-align: center; padding: 0 24px 52px; }
+    .gal-header .lbl { justify-content: center; }
+
+    .gal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 0;
+    }
+
+    .gi { position: relative; overflow: hidden; }
+
+    /* Portrait 3:4 */
+    .gi-pt  { aspect-ratio: 3/4; }
+    /* Narrow portrait 9:16 */
+    .gi-pp  { aspect-ratio: 9/16; }
+    /* Landscape spans 2 cols, 16:9 */
+    .gi-wide { grid-column: span 2; aspect-ratio: 16/9; }
+
+    .gi-inner {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+
+    .gi-inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
+    }
+
+    /* Vignette: dark edges, bright center */
+    .gi-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 45%,
+        transparent 30%,
+        rgba(8,8,8,0.42) 60%,
+        rgba(8,8,8,0.88) 100%);
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.5s;
+    }
+
+    /* Side & bottom blend */
+    .gi-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(8,8,8,0.6) 0%, transparent 18%, transparent 82%, rgba(8,8,8,0.6) 100%),
+        linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, transparent 15%, transparent 80%, rgba(8,8,8,0.75) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Gold shimmer on hover */
+    .gi-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        transparent 30%,
+        rgba(223,184,108,0.07) 50%,
+        transparent 70%);
+      opacity: 0;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+
+    .gi:hover .gi-inner img { transform: scale(1.06); }
+    .gi:hover .gi-vignette { opacity: 0.55; }
+    .gi:hover .gi-shine { opacity: 1; }
+
+    /* Outer edge mask on full grid */
+    .gal-grid-wrap {
+      position: relative;
+    }
+    .gal-grid-wrap::before,
+    .gal-grid-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 20;
+      pointer-events: none;
+    }
+    .gal-grid-wrap::before {
+      right: 0;
+      background: linear-gradient(to left, rgba(8,8,8,1) 0%, transparent 100%);
+    }
+    .gal-grid-wrap::after {
+      left: 0;
+      background: linear-gradient(to right, rgba(8,8,8,1) 0%, transparent 100%);
+    }
+
+    @media(max-width:900px){
+      .gal-grid { grid-template-columns: repeat(2,1fr); }
+      .gi-wide { grid-column: span 2; }
+    }
+    @media(max-width:480px){
+      .gal-grid { grid-template-columns: repeat(2,1fr); gap:4px; }
+      .gi-pp { aspect-ratio: 3/4; }
+    }
+
+  
   </style>
 </head>
 <body>
@@ -307,6 +662,18 @@
 
   <div class="gd"></div>
 
+  <!-- VIP STRIP -->
+  <section style="background:var(--black-2); padding:20px 0; position:relative; z-index:5; border-top:1px solid var(--gold-line); border-bottom:1px solid var(--gold-line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 24px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; justify-content:center;">
+      <span style="font-size:0.72rem; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; font-weight:600; white-space:nowrap;">נראו אצלנו</span>
+      <div style="width:1px; height:24px; background:var(--gold-line);"></div>
+      <span style="font-size:0.9rem; color:var(--white-60); font-weight:300;">שאול מופז ·&nbsp;</span>
+      <span style="font-size:0.9rem; color:var(--white-60); font-weight:300;">מרינה מקסימין ·&nbsp;</span>
+      <span style="font-size:0.9rem; color:var(--white-60); font-weight:300;">יאן בלומין ·&nbsp;</span>
+      <span style="font-size:0.9rem; color:var(--white-60); font-weight:300;">ועוד מאות לקוחות מרוצים</span>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="sec" id="about" style="background:transparent;">
     <div class="wrap">
@@ -330,15 +697,21 @@
         </div>
         <div class="about-3d-scene" id="aboutScene">
           <div class="about-3d-wrap" id="aboutWrap">
-            <!-- Only images NOT used in events carousel -->
-            <div class="p-card p-card-1"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/c7eb1a686_20251221_222639.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-            <div class="p-card p-card-2"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/0094d0e8c_Screenshot_20241015_122402_WhatsApp.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-            <div class="p-card p-card-3"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/09e37a708_20251013_115549.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-            <div class="p-card p-card-4"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/021471b40_20260624_200656.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
+            <div class="p-card p-card-1">
+              <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/c55002c02_20251008_211443.jpg" alt="אמיר עם אורח מפורסם" loading="lazy" decoding="async" />
+            </div>
+            <div class="p-card p-card-2">
+              <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/9e286466e_20260624_210736.jpg" alt="אמיר עם אורח מפורסם" loading="lazy" decoding="async" />
+            </div>
+            <div class="p-card p-card-3">
+              <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/49311d02e_20260624_225844.jpg" alt="אמיר עם אמנית" loading="lazy" decoding="async" />
+            </div>
+            <div class="p-card p-card-4">
+              <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/966d0e071_Screenshot_20250908_232430_WhatsApp.jpg" alt="אמיר באירוע יוקרתי" loading="lazy" decoding="async" />
+            </div>
             <div class="p-badge-3d"><div class="num">10</div><div class="txt">עמדות לאירוע</div></div>
           </div>
-        </div>
-      </div>
+        </div></div>
     </div>
   </section>
 
@@ -388,39 +761,106 @@
 
   <div class="gd"></div>
 
-  <!-- EVENTS (3D CAROUSEL) — images NOT used in About section -->
-  <section class="sec events-bg" id="events">
-    <div class="ev-header-wrap rv-txt">
-      <div class="lbl" style="justify-content:center;"><div class="lbl-line"></div><span>הגלריה שלנו</span><div class="lbl-line"></div></div>
-      <h2 class="h2" style="font-size:clamp(2.2rem,4.5vw,3.5rem);">חוויה בלתי נשכחת</h2>
-      <p class="body-text" style="margin:8px auto 0; color:var(--gold);">גללו לסיבוב הגלריה ▾</p>
+  
+  <!-- EVENTS / SCROLL GALLERY -->
+        <section id="events" class="gal-section">
+    <div class="gal-header">
+      <div class="lbl"><div class="lbl-line"></div><span>האירועים שלנו</span></div>
+      <h2 class="h2" style="margin-top:12px;">רגעים שנשארים לתמיד</h2>
     </div>
-    <div class="carousel-container">
-      <div class="carousel-tilt">
-        <div class="carousel-3d" id="car3d">
-          <!-- Video 1 -->
-          <div class="car-item"><video autoplay muted loop playsinline preload="none"><source src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/8e2b69a7e_fa295935a_20260624_200234.mp4" type="video/mp4" /></video></div>
-          <!-- Images NOT used in About (about uses: c7eb1a686, 0094d0e8c, 09e37a708, 021471b40) -->
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/86e96f219_20251013_1155491.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/073c103c1_20251221_222401.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/995c16387_20260624_210736.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/73b71f2ef_20260624_225844.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/6d3a9157d_Screenshot_20250908_232430_WhatsApp.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2452c5acf_20251008_211443.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/1fac5d0c8_20260624_225844.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/426ae8f3e_20260624_200656.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/9eb1f13c7_20251008_211443.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/f2d5d9344_20251221_222401.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/f88723346_20260624_210736.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/52ed32f04_20260624_225844.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/e559fbf6b_20260624_200344.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <div class="car-item"><img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/fa76e554d_20260624_2126011.jpg" alt="אירוע" loading="lazy" decoding="async" /></div>
-          <!-- Video 2 -->
-          <div class="car-item"><video autoplay muted loop playsinline preload="none"><source src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/3ad384711_20260624_200444.mp4" type="video/mp4" /></video></div>
+    <div class="gal-grid-wrap">
+      <div class="gal-grid">
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/7002e0f2f_20241010_234801.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/5f38bb530_20241010_2333251.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-wide">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/9c3e8b0a3_20251008_1948411.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pp">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/e8457d178_20251013_104422.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pp">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/940a1ec02_20251013_1155492.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/073c103c1_20251221_222401.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pp">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/bc1d99549_20251221_2226391.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/2963ab940_20260624_184817.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/995c16387_20260624_210736.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/734d964ad_20260624_212601.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/73b71f2ef_20260624_225844.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
+        </div>
+        <div class="gi gi-pt">
+          <div class="gi-inner">
+            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/e559fbf6b_20260624_200344.jpg" alt="" decoding="async">
+            <div class="gi-vignette"></div>
+            <div class="gi-shine"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+
+
+
 
   <div class="gd"></div>
 
@@ -457,6 +897,22 @@
     </div>
   </section>
 
+  <div class="gd"></div>
+
+  <!-- PARALLAX SECTION -->
+  <section class="parallax-sec" id="parallax">
+    <div class="parallax-bg" id="parallaxBg"></div>
+    <div class="parallax-overlay"></div>
+    <div class="parallax-content rv-txt">
+      <div class="lbl" style="justify-content:center;"><div class="lbl-line"></div><span>החוויה שמחכה לכם</span><div class="lbl-line"></div></div>
+      <h2 class="parallax-h2">כל אירוע ראוי<br>לנרגילה אחת שמגדירה אותו</h2>
+      <p class="parallax-p">עשן, ריח, אורות — הרגע שבו הנרגילה נדלקת הוא הרגע שבו הערב מתחיל באמת.</p>
+      <a class="btn-gold" href="https://wa.me/972546940927" target="_blank" style="margin-top:32px;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2a10 10 0 00-8.497 15.273L2 22l4.867-1.477A10 10 0 1012.004 2z"/></svg>
+        בואו נדבר על האירוע שלכם
+      </a>
+    </div>
+  </section>
   <div class="gd"></div>
 
   <!-- PACKAGES -->
@@ -594,14 +1050,16 @@
       </div>
       <div class="foot-bottom">
         <p>כל הזכויות שמורות © 2026 מלך הנרגילות — אמיר</p>
-        <a href="https://shapodigital.com" target="_blank">עיצוב ופיתוח: שאפו דיגיטל</a>
+        <a href="#" id="privLink">מדיניות פרטיות</a> &nbsp;|&nbsp; <a href="https://shapodigital.com" target="_blank">עיצוב ופיתוח: שאפו דיגיטל</a>
       </div>
     </div>
   </footer>
 
   <script>
     function initGSAP() {
-      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") { setTimeout(initGSAP, 50); return; }
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        setTimeout(initGSAP, 30); return;
+      }
       gsap.registerPlugin(ScrollTrigger);
 
     /* SMOKE */
@@ -648,14 +1106,22 @@
     const carAngle = 360 / numCar;
     function setupCarousel() {
       const mobile = window.innerWidth < 768;
-      const cw = mobile ? 200 : 340;
-      const tz = Math.round((cw / 2) / Math.tan(Math.PI / numCar)) + (mobile ? 20 : 50);
+      const cw = mobile ? 240 : 420;
+      const tz = Math.round((cw / 2) / Math.tan(Math.PI / numCar)) + (mobile ? 30 : 80);
       carItems.forEach((item, i) => { item.style.transform = `rotateY(${i * carAngle}deg) translateZ(${tz}px)`; });
     }
     setupCarousel();
     document.getElementById('car3d').classList.add('js-ready');
     window.addEventListener('resize', () => { setupCarousel(); document.getElementById('car3d').classList.add('js-ready'); });
-    gsap.to('#car3d', { rotationY:-360, ease:'none', scrollTrigger:{ trigger:'#events', start:'top top', end:'+=2800', pin:true, scrub:1 } });
+    const isMobile = window.innerWidth < 768;
+      gsap.to('#car3d', { rotationY:-360, ease:'none', scrollTrigger:{
+        trigger:'#events',
+        start:'top top',
+        end: isMobile ? '+=1400' : '+=2800',
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
+      } });
 
     /* REVIEWS DRAG */
     (function() {
@@ -679,7 +1145,210 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     }, { passive:true });
   }
+
+
+
+      /* ══ SCROLL GALLERY JS ══ */
+      (function(){
+        const track   = document.getElementById('sgTrack');
+        const slides  = track ? track.querySelectorAll('.sg-slide') : [];
+        const dots    = document.querySelectorAll('.sg-dot');
+        const curEl   = document.getElementById('sgCur');
+        let cur = 0, startX = 0, isDragging = false;
+
+        function goTo(n) {
+          cur = (n + slides.length) % slides.length;
+          track.style.transform = `translateX(-${cur * 100}%)`;
+          dots.forEach((d,i) => d.classList.toggle('active', i===cur));
+          if (curEl) curEl.textContent = cur + 1;
+          // Autoplay video on current slide
+          slides.forEach((s,i) => {
+            const v = s.querySelector('video');
+            if (v) { i===cur ? v.play() : v.pause(); }
+          });
+        }
+
+        document.getElementById('sgNext')?.addEventListener('click', () => goTo(cur+1));
+        document.getElementById('sgPrev')?.addEventListener('click', () => goTo(cur-1));
+        dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+
+        // Touch/drag swipe
+        const wrapper = document.getElementById('sgWrapper');
+        if (wrapper) {
+          wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+          wrapper.addEventListener('touchend',   e => {
+            const dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 50) goTo(dx < 0 ? cur+1 : cur-1);
+          }, {passive:true});
+          wrapper.addEventListener('mousedown',  e => { startX = e.clientX; isDragging = true; });
+          wrapper.addEventListener('mouseup',    e => {
+            if (!isDragging) return; isDragging = false;
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) > 60) goTo(dx < 0 ? cur+1 : cur-1);
+          });
+        }
+
+        // Auto-advance every 5s
+        setInterval(() => goTo(cur+1), 5000);
+        goTo(0);
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft')  goTo(cur+1);
+          if (e.key === 'ArrowRight') goTo(cur-1);
+        });
+      })();
+      /* PARALLAX SECTION */
+      gsap.to('#parallaxBg', {
+        yPercent: 35,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#parallax',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+      gsap.from('.parallax-content', {
+        opacity: 0, y: 60,
+        scrollTrigger: {
+          trigger: '#parallax',
+          start: 'top 70%',
+          toggleActions: 'play none none none'
+        },
+        duration: 1.2, ease: 'power3.out'
+      });
+      /* ACCESSIBILITY */
+      const accBtn   = document.getElementById('accBtn');
+      const accPanel = document.getElementById('accPanel');
+      accBtn.addEventListener('click', () => accPanel.classList.toggle('open'));
+      document.addEventListener('click', e => { if (!accPanel.contains(e.target) && e.target !== accBtn) accPanel.classList.remove('open'); });
+      function accToggle(cls, btnId) {
+        document.body.classList.toggle(cls);
+        document.getElementById(btnId).classList.toggle('active', document.body.classList.contains(cls));
+        localStorage.setItem(cls, document.body.classList.contains(cls));
+      }
+      document.getElementById('accLarge').addEventListener('click',    () => accToggle('acc-large','accLarge'));
+      document.getElementById('accContrast').addEventListener('click', () => accToggle('acc-contrast','accContrast'));
+      document.getElementById('accMotion').addEventListener('click',   () => accToggle('acc-no-motion','accMotion'));
+      document.getElementById('accLinks').addEventListener('click',    () => accToggle('acc-links','accLinks'));
+      document.getElementById('accDyslexia').addEventListener('click', () => accToggle('acc-dyslexia','accDyslexia'));
+      document.getElementById('accFocus').addEventListener('click',    () => accToggle('acc-focus','accFocus'));
+      document.getElementById('accReset').addEventListener('click', () => {
+        ['acc-large','acc-contrast','acc-no-motion','acc-links','acc-dyslexia','acc-focus'].forEach(c => {
+          document.body.classList.remove(c); localStorage.removeItem(c);
+          document.querySelectorAll('.acc-row button').forEach(b => b.classList.remove('active'));
+        });
+      });
+      // Restore saved preferences
+      ['acc-large','acc-contrast','acc-no-motion','acc-links','acc-dyslexia','acc-focus'].forEach(c => {
+        if (localStorage.getItem(c) === 'true') {
+          document.body.classList.add(c);
+          const btn = document.querySelector(`#acc${c.replace('acc-','').charAt(0).toUpperCase()+c.replace('acc-','').slice(1)}`);
+          if (btn) btn.classList.add('active');
+        }
+      });
+      /* PRIVACY MODAL */
+      document.getElementById('privLink').addEventListener('click', e => { e.preventDefault(); document.getElementById('privOverlay').classList.add('open'); });
+      document.getElementById('privClose').addEventListener('click', () => document.getElementById('privOverlay').classList.remove('open'));
+      document.getElementById('privOverlay').addEventListener('click', e => { if (e.target === document.getElementById('privOverlay')) document.getElementById('privOverlay').classList.remove('open'); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('privOverlay').classList.remove('open'); accPanel.classList.remove('open'); } });
+    }
     initGSAP();
     </script>
+
+  <!-- ACCESSIBILITY WIDGET (IS 5568 / WCAG 2.1 AA) -->
+  <button class="acc-btn" id="accBtn" aria-label="נגישות" title="אפשרויות נגישות">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M15.89 8.11C15.5 7.72 14.83 7.5 14 7.5H10c-.83 0-1.5.22-1.89.61L5 11.5l1.41 1.41 2.59-2.59V22h2v-5h2v5h2V10.32l2.59 2.59L19 11.5l-3.11-3.39z"/></svg>
+  </button>
+  <div class="acc-panel" id="accPanel" role="dialog" aria-label="תפריט נגישות">
+    <h3>נגישות</h3>
+    <div class="acc-row"><label>הגדל טקסט</label><button id="accLarge">א+</button></div>
+    <div class="acc-row"><label>ניגודיות גבוהה</label><button id="accContrast">◑</button></div>
+    <div class="acc-row"><label>הפחת אנימציות</label><button id="accMotion">הפחת</button></div>
+    <div class="acc-row"><label>הדגש קישורים</label><button id="accLinks">הדגש</button></div>
+    <div class="acc-row"><label>גופן קריא</label><button id="accDyslexia">קריא</button></div>
+    <div class="acc-row"><label>סמן פוקוס</label><button id="accFocus">הצג</button></div>
+    <button class="acc-reset" id="accReset">איפוס הכל</button>
+    <p style="margin-top:14px;font-size:0.75rem;color:rgba(255,255,255,0.3);line-height:1.5;">האתר מיועד לעמוד בתקן נגישות ישראלי IS 5568 ו-WCAG 2.1 רמה AA</p>
+  </div>
+  <!-- PRIVACY POLICY MODAL -->
+  <div class="priv-overlay" id="privOverlay" role="dialog" aria-modal="true" aria-label="מדיניות פרטיות">
+    <div class="priv-box">
+      <button class="priv-close" id="privClose" aria-label="סגור">✕</button>
+      <h2>מדיניות פרטיות</h2>
+      <div class="priv-date">עדכון אחרון: יוני 2026 | מלך הנרגילות — אמיר, ישראל</div>
+      <h3>1. מי אנחנו</h3>
+      <p>מלך הנרגילות הוא עסק לשירותי השכרת נרגילות פרימיום לאירועים, המנוהל על ידי אמיר (להלן "העסק"). לפניות: 054-694-0927 / WhatsApp.</p>
+      <h3>2. איזה מידע נאסף</h3>
+      <p>בעת יצירת קשר דרך האתר (WhatsApp/טלפון), ייתכן שיאסף המידע הבא:</p>
+      <ul>
+        <li>שם מלא ומספר טלפון</li>
+        <li>פרטי האירוע (תאריך, מיקום, סוג)</li>
+        <li>הודעות שנשלחו דרך WhatsApp</li>
+      </ul>
+      <h3>3. קוקיז (Cookies)</h3>
+      <p>האתר אינו משתמש בקוקיז מסחריים לצורכי פרסום. ייתכן שהדפדפן יאחסן מידע טכני בסיסי לשיפור ביצועים (Session Storage בלבד). אנו אינם עוקבים אחר גולשים בין אתרים שונים.</p>
+      <h3>4. כיצד המידע משמש</h3>
+      <ul>
+        <li>מענה לפניות ושאלות לגבי השכרת נרגילות</li>
+        <li>תיאום אירועים ושליחת הצעות מחיר</li>
+        <li>שיפור השירות</li>
+      </ul>
+      <h3>5. שיתוף מידע</h3>
+      <p>המידע שלכם אינו נמכר, מושכר או מועבר לצדדים שלישיים. המידע מועבר אך ורק כאשר נדרש על פי חוק.</p>
+      <h3>6. אחסון ואבטחה</h3>
+      <p>הפרטים שנמסרים בוואטסאפ מאוחסנים בהתאם למדיניות WhatsApp/Meta. אנו נוקטים אמצעי זהירות סבירים להגנה על המידע.</p>
+      <h3>7. זכויותיכם (חוק הגנת הפרטיות, תשמ"א-1981)</h3>
+      <ul>
+        <li>זכות לעיין במידע המוחזק לגביכם</li>
+        <li>זכות לתיקון מידע לא מדויק</li>
+        <li>זכות למחיקת המידע</li>
+      </ul>
+      <p>לממש זכויותיכם — פנו ב-WhatsApp: 054-694-0927</p>
+      <h3>8. שינויים במדיניות</h3>
+      <p>נעדכן מדיניות זו מעת לעת. המשך שימוש באתר לאחר עדכון מהווה הסכמה.</p>
+      <h3>9. יצירת קשר</h3>
+      <p>לכל שאלה בנושא פרטיות: <a href="https://wa.me/972546940927">WhatsApp</a> | טלפון: 054-694-0927</p>
+    </div>
+  </div>
+
+  <script>
+    // ── GALLERY REVEAL WITH GSAP SCROLLTRIGGER ──
+    (function() {
+      function initGalleryReveal() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+          setTimeout(initGalleryReveal, 100);
+          return;
+        }
+        gsap.registerPlugin(ScrollTrigger);
+
+        const items = document.querySelectorAll('.gi');
+        items.forEach(function(el, i) {
+          gsap.fromTo(el,
+            { opacity: 0, y: 50, scale: 0.95 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.85,
+              ease: 'power3.out',
+              delay: (i % 4) * 0.08,   /* stagger by column position */
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 88%',
+                end: 'top 40%',
+                toggleActions: 'play none none none',
+                once: true
+              }
+            }
+          );
+        });
+      }
+      document.addEventListener('DOMContentLoaded', initGalleryReveal);
+      if (document.readyState !== 'loading') initGalleryReveal();
+    })();
+  </script>
+
 </body>
 </html>
