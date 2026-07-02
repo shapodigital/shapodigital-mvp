@@ -545,7 +545,7 @@
       padding: 0;
     }
 
-    .gi { position: relative; overflow: hidden; }
+    .gi { position: relative; overflow: hidden; opacity: 1 !important; }
 
     /* Portrait 3:4 */
     .gi-pt  { aspect-ratio: 3/4; }
@@ -2398,36 +2398,40 @@
   </div>
 
   <script>
-        // ── GALLERY REVEAL WITH GSAP SCROLLTRIGGER ──
+        // ── GALLERY REVEAL (safe: images are ALWAYS visible, animation is a pure enhancement) ──
         (function() {
           function initGalleryReveal() {
             if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-              setTimeout(initGalleryReveal, 100);
-              return;
+              return; // no GSAP? images stay fully visible via CSS, nothing breaks.
             }
             gsap.registerPlugin(ScrollTrigger);
 
             const items = document.querySelectorAll('.gi');
             items.forEach(function(el, i) {
+              // opacity NEVER touched here - only a subtle transform, so a missed/failed
+              // ScrollTrigger (e.g. direct #anchor navigation, no scroll event) can never
+              // leave an image invisible again.
               gsap.fromTo(el,
-                { opacity: 0, y: 50, scale: 0.95 },
+                { y: 40, scale: 0.97 },
                 {
-                  opacity: 1,
                   y: 0,
                   scale: 1,
                   duration: 0.85,
                   ease: 'power3.out',
-                  delay: (i % 4) * 0.08,   /* stagger by column position */
+                  delay: (i % 4) * 0.08,
                   scrollTrigger: {
                     trigger: el,
-                    start: 'top 88%',
-                    end: 'top 40%',
+                    start: 'top 95%',
                     toggleActions: 'play none none none',
                     once: true
                   }
                 }
               );
             });
+            // Make sure anything already in view (e.g. direct #events link) settles instantly.
+            if (typeof ScrollTrigger.refresh === 'function') {
+              requestAnimationFrame(function(){ ScrollTrigger.refresh(); });
+            }
           }
           document.addEventListener('DOMContentLoaded', initGalleryReveal);
           if (document.readyState !== 'loading') initGalleryReveal();
