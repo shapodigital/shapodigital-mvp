@@ -2078,6 +2078,25 @@
   </footer>
 
   <script>
+    (function ensureHeroVideoLoop(){
+      const apply = () => {
+        const video = document.getElementById('heroVideo');
+        if (!video) return;
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once:true });
+      else apply();
+      window.addEventListener('pageshow', apply);
+    })();
+
     function initGSAP() {
       if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
         setTimeout(initGSAP, 30); return;
