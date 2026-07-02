@@ -714,30 +714,58 @@
       border-color: rgba(223,184,108,0.45);
     }
 
-    /* Product image — sits inside card, centered, no overflow over title */
+    /* Product image — transparent cutout with premium floating aura */
     .ps-img-wrap {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 250px;
       margin-top: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      padding: 24px 0 0;
+      padding: 18px 0 0;
+      isolation: isolate;
+      overflow: visible;
+    }
+    .ps-img-wrap::before {
+      content:'';
+      position:absolute;
+      width:72%;
+      height:72%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(223,184,108,.22) 0%, rgba(223,184,108,.08) 42%, transparent 72%);
+      filter:blur(10px);
+      transform:translateY(8px) scale(.95);
+      z-index:0;
+    }
+    .ps-img-wrap::after {
+      content:'';
+      position:absolute;
+      bottom:24px;
+      width:54%;
+      height:18px;
+      border-radius:999px;
+      background:radial-gradient(ellipse, rgba(223,184,108,.28) 0%, transparent 72%);
+      filter:blur(8px);
+      opacity:.8;
+      z-index:0;
     }
     .ps-img {
-      width: 75%;
-      max-height: 190px;
+      position:relative;
+      z-index:1;
+      width:82%;
+      max-height:225px;
       object-fit: contain;
-      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.9)) drop-shadow(0 0 30px rgba(223,184,108,0.2));
+      mix-blend-mode: normal;
+      filter: drop-shadow(0 28px 55px rgba(0,0,0,0.82)) drop-shadow(0 0 28px rgba(223,184,108,0.28));
       transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
                   filter 0.5s ease;
       transform: translateY(0) scale(1);
     }
     .ps-card:hover .ps-img {
-      transform: translateY(-10px) scale(1.05);
-      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.95)) drop-shadow(0 0 40px rgba(223,184,108,0.35));
+      transform: translateY(-12px) scale(1.07) rotateZ(-1deg);
+      filter: drop-shadow(0 34px 64px rgba(0,0,0,0.86)) drop-shadow(0 0 44px rgba(223,184,108,0.42));
     }
 
     .ps-body {
@@ -1893,7 +1921,7 @@
 
         <div class="ps-card rv-txt ps-card-hookah" data-tilt>
           <div class="ps-img-wrap">
-            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/414bb2d3d_generated_image.png" alt="נרגילה פרימיום" class="ps-img">
+            <img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/45a276f47_hookah_transparent.png" alt="נרגילה פרימיום" class="ps-img">
           </div>
           <div class="ps-body">
             <h3 class="ps-title">עמדת נרגילה פרימיום</h3>
@@ -1904,7 +1932,7 @@
 
         <div class="ps-card rv-txt ps-card-tobacco" data-tilt>
           <div class="ps-img-wrap">
-            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/7c1b8a488_generated_image.png" alt="טבק מובחר" class="ps-img">
+            <img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/132bb0f01_tobacco_transparent.png" alt="טבק מובחר" class="ps-img">
           </div>
           <div class="ps-body">
             <h3 class="ps-title">טבק עולמי מובחר</h3>
@@ -1915,7 +1943,7 @@
 
         <div class="ps-card rv-txt ps-card-coals" data-tilt>
           <div class="ps-img-wrap">
-            <img src="https://media.base44.com/images/public/6a4393fe152404712a5afe37/df95ea9f3_generated_image.png" alt="גחלים טבעיים" class="ps-img">
+            <img src="https://base44.app/api/apps/6a4393fe152404712a5afe37/files/mp/public/6a4393fe152404712a5afe37/f722f4fb3_coals_transparent.png" alt="גחלים טבעיים" class="ps-img">
           </div>
           <div class="ps-body">
             <h3 class="ps-title">גחלים טבעיים</h3>
