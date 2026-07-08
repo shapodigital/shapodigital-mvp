@@ -1408,10 +1408,36 @@
     .netx-sub:last-of-type { margin-bottom: 50px; }
 
     /* מפת ישראל */
+    .netx-map-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: 220px minmax(280px, 1fr);
+      gap: 28px;
+      align-items: center;
+      max-width: 820px;
+      margin: 0 auto 44px;
+      padding: 24px;
+      border: 1px solid rgba(197,160,80,0.22);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(197,160,80,0.08), rgba(8,8,8,0.55));
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+      overflow: hidden;
+    }
+    .netx-map-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40% 10% auto auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(197,160,80,0.18), transparent 62%);
+      filter: blur(24px);
+      pointer-events: none;
+    }
     .netx-map {
       position: relative;
       width: 200px; height: 400px;
-      margin: 0 auto 40px;
+      margin: 0 auto;
+      z-index: 1;
     }
     .netx-map-svg { width: 100%; height: 100%; overflow: visible; }
     .netx-israel {
@@ -1442,14 +1468,48 @@
       box-shadow: 0 0 20px rgba(247,232,189,0.8);
     }
     .netx-pin-label {
-      position: absolute; right: 22px; top: 50%;
+      position: absolute; right: 20px; top: 50%;
       transform: translateY(-50%);
       white-space: nowrap;
-      font-size: 12px; letter-spacing: 1px;
+      font-size: 12px; letter-spacing: 0.5px;
       color: #f7e8bd;
-      background: rgba(8,8,8,0.85);
+      background: rgba(8,8,8,0.86);
       border: 1px solid rgba(197,160,80,0.4);
-      border-radius: 20px; padding: 4px 12px;
+      border-radius: 20px; padding: 4px 10px;
+    }
+    .netx-branch-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      text-align: right;
+    }
+    .netx-branch-head {
+      grid-column: 1 / -1;
+      color: #f7e8bd;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+    .netx-branch {
+      border: 1px solid rgba(197,160,80,0.22);
+      background: rgba(8,8,8,0.42);
+      border-radius: 14px;
+      padding: 11px 12px;
+      min-height: 66px;
+    }
+    .netx-branch-city {
+      color: #f0e8d8;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .netx-branch-address {
+      color: rgba(232,224,208,0.72);
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     /* שורת סטטיסטיקות: ותק / סניפים / אירועים */
@@ -1508,7 +1568,15 @@
       .netx { padding: 70px 20px; }
       .netx-orbit-2 { width: 480px; height: 480px; }
       .netx-orbit-1 { width: 340px; height: 340px; }
+      .netx-map-panel {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 18px;
+        margin-bottom: 34px;
+      }
       .netx-map { width: 150px; height: 300px; }
+      .netx-branch-list { grid-template-columns: 1fr; gap: 8px; }
+      .netx-branch { min-height: auto; padding: 10px 12px; }
       .netx-sub { font-size: 15px; }
       .netx-foot { font-size: 16px; }
     }
@@ -2091,7 +2159,7 @@
 
       <p class="netx-sub">
         20 שנה שאנחנו כבר איתכם. חנות אחת קטנה בנתניה הפכה לרשת שכל הארץ מכירה —
-        עם 7 סניפים, אלפי לקוחות קבועים, וטבק פרימיום שמביאים ישירות מהיצרניות הגדולות בעולם.
+        עם 11 סניפים, אלפי לקוחות קבועים, וטבק פרימיום שמביאים ישירות מהיצרניות הגדולות בעולם.
       </p>
       <p class="netx-sub">
         מהניסיון הזה נולד גם שירות האירועים שלנו: אותו טעם, אותה אווירה,
@@ -2106,7 +2174,7 @@
           <div class="netx-stat-lbl">שנות ותק ואמינות</div>
         </div>
         <div class="netx-stat">
-          <div class="netx-stat-num">7</div>
+          <div class="netx-stat-num">11</div>
           <div class="netx-stat-lbl">סניפים בפריסה ארצית</div>
         </div>
         <div class="netx-stat">
@@ -2115,28 +2183,48 @@
         </div>
       </div>
 
-      <!-- מפת ישראל מרומזת עם נקודות סניפים -->
-      <div class="netx-map">
-        <svg class="netx-map-svg" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid meet">
-          <path class="netx-israel" d="M95 8 L108 40 L118 75 L112 105 L120 140 L110 175 L118 210 L100 255 L92 300 L80 340 L70 375 L62 392 L58 360 L66 320 L72 280 L80 240 L74 200 L80 160 L74 120 L82 85 L86 45 Z"/>
-        </svg>
-        <!-- נקודות סניפים -->
-        <span class="netx-pin netx-pin-home" style="top:30%;left:52%;"><span class="netx-pin-label">נתניה · הבית</span></span>
-        <span class="netx-pin" style="top:14%;left:60%;"></span>
-        <span class="netx-pin" style="top:22%;left:44%;"></span>
-        <span class="netx-pin" style="top:42%;left:58%;"></span>
-        <span class="netx-pin" style="top:54%;left:46%;"></span>
-        <span class="netx-pin" style="top:66%;left:55%;"></span>
-        <span class="netx-pin" style="top:80%;left:44%;"></span>
+      <!-- מפת ישראל עם נקודות וכתובות סניפים -->
+      <div class="netx-map-panel" aria-label="מפת סניפי מלך הנרגילות וכתובות">
+        <div class="netx-map">
+          <svg class="netx-map-svg" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid meet">
+            <path class="netx-israel" d="M95 8 L108 40 L118 75 L112 105 L120 140 L110 175 L118 210 L100 255 L92 300 L80 340 L70 375 L62 392 L58 360 L66 320 L72 280 L80 240 L74 200 L80 160 L74 120 L82 85 L86 45 Z"/>
+          </svg>
+          <!-- נקודות סניפים -->
+          <span class="netx-pin" style="top:8%;left:57%;"><span class="netx-pin-label">נהריה</span></span>
+          <span class="netx-pin" style="top:13%;left:51%;"><span class="netx-pin-label">כפר יאסיף</span></span>
+          <span class="netx-pin" style="top:17%;left:58%;"><span class="netx-pin-label">קרית ביאליק</span></span>
+          <span class="netx-pin" style="top:24%;left:60%;"><span class="netx-pin-label">טבריה</span></span>
+          <span class="netx-pin" style="top:29%;left:52%;"><span class="netx-pin-label">עפולה</span></span>
+          <span class="netx-pin" style="top:35%;left:46%;"><span class="netx-pin-label">יקנעם</span></span>
+          <span class="netx-pin" style="top:42%;left:43%;"><span class="netx-pin-label">פרדס חנה</span></span>
+          <span class="netx-pin" style="top:47%;left:45%;"><span class="netx-pin-label">חדרה</span></span>
+          <span class="netx-pin netx-pin-home" style="top:52%;left:49%;"><span class="netx-pin-label">נתניה · הבית</span></span>
+          <span class="netx-pin" style="top:59%;left:48%;"><span class="netx-pin-label">הוד השרון</span></span>
+          <span class="netx-pin" style="top:91%;left:44%;"><span class="netx-pin-label">אילת</span></span>
+        </div>
+        <div class="netx-branch-list">
+          <div class="netx-branch-head">כתובות הסניפים</div>
+          <div class="netx-branch"><div class="netx-branch-city">נתניה</div><div class="netx-branch-address">דרך רזיאל 11</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">עפולה</div><div class="netx-branch-address">הרב קירשטיין 1</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">קרית ביאליק</div><div class="netx-branch-address">שדרות ירושלים 15</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">יקנעם עילית</div><div class="netx-branch-address">החרצית 52</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">פרדס חנה-כרכור</div><div class="netx-branch-address">הגלעד 1, מתחם תבורי</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">הוד השרון</div><div class="netx-branch-address">דרך רמתיים 40</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">נהריה</div><div class="netx-branch-address">שדרות הגעתון 43</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">טבריה</div><div class="netx-branch-address">יוחנן בן זכאי</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">אילת</div><div class="netx-branch-address">שדרות התמרים 235</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">כפר יאסיף</div><div class="netx-branch-address">כביש 70</div></div>
+          <div class="netx-branch"><div class="netx-branch-city">חדרה</div><div class="netx-branch-address">הנשיא 62</div></div>
+        </div>
       </div>
 
       <!-- מונה סניפים ענק -->
       <div class="netx-counter">
-        <div class="netx-big" data-count="7">7</div>
+        <div class="netx-big" data-count="11">11</div>
         <div class="netx-big-lbl">סניפים · פריסה ארצית</div>
       </div>
 
-      <p class="netx-foot">20 שנה, 7 סניפים, אירוע אחד בכל פעם — מנתניה ועד כל הארץ. מלך אחד. מלך הנרגילות.</p>
+      <p class="netx-foot">20 שנה, 11 סניפים, אירוע אחד בכל פעם — מנתניה ועד כל הארץ. מלך אחד. מלך הנרגילות.</p>
     </div>
   </section>
 
