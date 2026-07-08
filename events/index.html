@@ -306,10 +306,10 @@
     .cta-strip h2 { font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:800; line-height:1.2; }
     .cta-strip h2 span { color:var(--gold); }
     .cta-strip p { font-size:1rem; color:var(--white-60); margin-top:10px; }
-    .cta-strip-media { position:relative; border:1px solid var(--gold-line); border-radius:22px; overflow:hidden; min-height:190px; box-shadow:0 22px 70px rgba(0,0,0,.42), 0 0 34px rgba(223,184,108,.10); isolation:isolate; }
-    .cta-strip-media::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(8,8,8,.04), rgba(8,8,8,.36)); z-index:1; pointer-events:none; }
-    .cta-strip-media::after { content:""; position:absolute; inset:0; box-shadow:inset 0 0 42px rgba(0,0,0,.55); z-index:2; pointer-events:none; }
-    .cta-strip-media img { display:block; width:100%; height:100%; min-height:190px; object-fit:cover; transform:scale(1.015); filter:saturate(.92) contrast(1.04) brightness(.86); }
+    .cta-strip-media { position:relative; border:1px solid var(--gold-line); border-radius:22px; overflow:hidden; min-height:190px; box-shadow:0 22px 70px rgba(0,0,0,.42), 0 0 34px rgba(223,184,108,.10); isolation:isolate; background:url("/assets/site/media/fruit_champagne_banner.webp") center/cover no-repeat; }
+    .cta-strip-media::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(8,8,8,.02), rgba(8,8,8,.14)); z-index:1; pointer-events:none; }
+    .cta-strip-media::after { content:""; position:absolute; inset:0; box-shadow:inset 0 0 26px rgba(0,0,0,.24); z-index:2; pointer-events:none; }
+    .cta-strip-media img { display:block; width:100%; height:100%; min-height:190px; object-fit:cover; transform:scale(1.015); filter:saturate(1.06) contrast(1.04) brightness(1.04); opacity:1 !important; visibility:visible !important; }
     .cta-strip-btns { display:flex; flex-direction:column; gap:12px; flex-shrink:0; }
     .cta-wa-btn { display:flex; align-items:center; gap:10px; background:var(--gold); color:var(--black); padding:16px 32px; border-radius:10px; text-decoration:none; font-weight:700; font-size:1.05rem; white-space:nowrap; transition:all .3s; }
     .cta-wa-btn:hover { background:#EED18D; }
@@ -2042,7 +2042,7 @@
         <p>צרו קשר עכשיו לקבלת מחיר ולהצעה מותאמת אישית — אמיר יחזור אליכם בהקדם.</p>
       </div>
       <div class="cta-strip-media" aria-hidden="true">
-        <img src="/assets/site/media/fruit_champagne_banner.webp" alt="עמדת פירות ושמפניה לאירוע" loading="lazy">
+        <img src="/assets/site/media/fruit_champagne_banner.webp" alt="עמדת פירות ושמפניה לאירוע" loading="eager" decoding="async">
       </div>
       <div class="cta-strip-btns">
         <a class="cta-wa-btn" href="https://wa.me/972546940927" target="_blank">
