@@ -2276,6 +2276,12 @@
         video.defaultMuted = true;
         video.loop = true;
         video.playsInline = true;
+        video.defaultPlaybackRate = 0.72;
+        video.playbackRate = 0.72;
+        video.addEventListener('loadedmetadata', () => {
+          video.defaultPlaybackRate = 0.72;
+          video.playbackRate = 0.72;
+        }, { once:true });
         video.setAttribute('muted', '');
         video.setAttribute('loop', '');
         video.setAttribute('playsinline', '');
