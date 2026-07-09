@@ -692,6 +692,44 @@
       background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
     }
     .ps-header { text-align:center; margin-bottom:70px; }
+    .ps-package-note {
+      max-width: 760px;
+      margin: 22px auto 0;
+      padding: 18px 22px;
+      border: 1px solid rgba(223,184,108,0.18);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(223,184,108,0.08), rgba(255,255,255,0.025));
+      color: var(--white-70);
+      font-size: 0.96rem;
+      line-height: 1.8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .ps-package-note strong { color: var(--gold); font-weight: 800; }
+    .ps-package-note .ps-note-btn {
+      flex: 0 0 auto;
+      padding: 11px 20px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: transform .25s ease, background .25s ease;
+    }
+    .ps-package-note .ps-note-btn:hover { background:#EED18D; transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .ps-package-note {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        margin-top: 18px;
+        padding: 16px;
+      }
+      .ps-package-note .ps-note-btn { width: 100%; text-align: center; }
+    }
 
     .ps-grid {
       display: grid;
@@ -2011,6 +2049,10 @@
       <div class="ps-header rv-txt">
         <div class="lbl" style="justify-content:center;"><div class="lbl-line"></div><span>הציוד שלנו</span><div class="lbl-line"></div></div>
         <h2 class="h2" style="margin-top:12px;">כל פרט. ברמה הגבוהה ביותר.</h2>
+        <div class="ps-package-note">
+          <span><strong>חשוב לדעת:</strong> סוג הציוד, הטבקים, הראשים והתוספות משתנים לפי החבילה שנבחרת.</span>
+          <a class="ps-note-btn" href="#packages">לעבור לחבילות</a>
+        </div>
       </div>
       <div class="ps-grid">
 
