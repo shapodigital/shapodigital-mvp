@@ -1630,8 +1630,8 @@
 
     @media (max-width: 560px) {
       .gal-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 5px !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 4px !important;
         padding: 0 8px !important;
       }
       .gal-grid > .gi,
@@ -1640,7 +1640,20 @@
       .gal-grid > .gi-wide,
       .gal-grid > .gi-tall,
       .gal-grid > .gi-sq {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
         aspect-ratio: 3 / 4 !important;
+      }
+    }
+
+
+    @media (max-width: 360px) {
+      .gal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      .gal-grid > .gi:last-child:nth-child(odd) {
+        grid-column: 1 / -1 !important;
+        aspect-ratio: 16 / 9 !important;
       }
     }
 
