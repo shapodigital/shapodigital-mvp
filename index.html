@@ -1813,6 +1813,68 @@
       filter: drop-shadow(0 0 10px rgba(223,184,108,.55));
     }
 
+
+    /* ═══════════ PACKAGE 3D SCROLL FINISH — existing package images only ═══════════ */
+    .pkg-img-side {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      isolation: isolate;
+    }
+
+    .pkg-img-side::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0%, rgba(223,184,108,.10) 42%, rgba(255,240,196,.20) 50%, rgba(223,184,108,.08) 58%, transparent 100%);
+      transform: translateX(120%);
+      opacity: 0;
+      transition: opacity .45s ease, transform 1.2s ease;
+      mix-blend-mode: screen;
+    }
+
+    .pkg-row:hover .pkg-img-side::before {
+      opacity: 1;
+      transform: translateX(-120%);
+    }
+
+    .pkg-img-side img {
+      transform-origin: 50% 50%;
+      transform-style: preserve-3d;
+      will-change: transform, filter;
+      backface-visibility: hidden;
+    }
+
+    .pkg-row::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(223,184,108,.12), transparent 54%);
+      opacity: 0;
+      transition: opacity .55s ease;
+    }
+
+    .pkg-row:hover::before {
+      opacity: .55;
+    }
+
+    .pkg-card-inner {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pkg-img-side,
+      .pkg-img-side img,
+      .pkg-card-inner {
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2552,8 +2614,36 @@
     /* PACKAGES ROWS ANIMATION */
     gsap.utils.toArray('.pkg-row').forEach(row => {
       const flip = row.classList.contains('flip');
-      gsap.from(row.querySelector('.pkg-img-side'),  { scrollTrigger:{ trigger:row, start:'top 80%' }, x:flip?80:-80, opacity:0, duration:1.2, ease:'power3.out' });
-      gsap.from(row.querySelector('.pkg-card-side'), { scrollTrigger:{ trigger:row, start:'top 80%' }, x:flip?-80:80, opacity:0, duration:1.2, ease:'power3.out', delay:0.1 });
+      const imgSide = row.querySelector('.pkg-img-side');
+      const cardSide = row.querySelector('.pkg-card-side');
+      const img = row.querySelector('.pkg-img-side img');
+      const cardInner = row.querySelector('.pkg-card-inner');
+
+      gsap.from(imgSide,  { scrollTrigger:{ trigger:row, start:'top 80%' }, x:flip?80:-80, opacity:0, duration:1.2, ease:'power3.out' });
+      gsap.from(cardSide, { scrollTrigger:{ trigger:row, start:'top 80%' }, x:flip?-80:80, opacity:0, duration:1.2, ease:'power3.out', delay:0.1 });
+
+      if (img && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(img, { transformPerspective:1200, transformOrigin:'center center', force3D:true });
+        gsap.fromTo(img,
+          { rotationY: flip ? -14 : 14, rotationX: 5, scale: 1.08, y: 36, z: -80 },
+          {
+            rotationY: flip ? 6 : -6,
+            rotationX: -3,
+            scale: 1.16,
+            y: -34,
+            z: 60,
+            ease:'none',
+            scrollTrigger:{ trigger:row, start:'top 92%', end:'bottom 18%', scrub:1.15 }
+          }
+        );
+      }
+
+      if (cardInner && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.fromTo(cardInner,
+          { y: 26, rotationY: flip ? 4 : -4 },
+          { y: -18, rotationY: 0, ease:'none', scrollTrigger:{ trigger:row, start:'top 88%', end:'bottom 25%', scrub:1.35 } }
+        );
+      }
     });
 
     /* NAVBAR */
