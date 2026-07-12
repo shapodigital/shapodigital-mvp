@@ -1875,6 +1875,108 @@
       }
     }
 
+
+    /* ═══════════ CTA + NETWORK PREMIUM CONTINUATION — no HTML changes ═══════════ */
+    .cta-strip {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .cta-strip::before {
+      content: '';
+      position: absolute;
+      inset: -35% -10%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 72% 50%, rgba(223,184,108,.20), transparent 30%),
+        radial-gradient(circle at 20% 20%, rgba(255,238,190,.08), transparent 34%);
+      filter: blur(6px);
+      opacity: .72;
+    }
+
+    .cta-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 0%, rgba(223,184,108,.08) 48%, transparent 68%);
+      transform: translateX(42%);
+      opacity: .55;
+    }
+
+    .cta-strip-inner {
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(223,184,108,.20);
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+      box-shadow: 0 34px 95px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.07);
+      backdrop-filter: blur(12px);
+      box-sizing: border-box;
+    }
+
+    .cta-strip h2 {
+      letter-spacing: -.02em;
+      text-shadow: 0 16px 42px rgba(0,0,0,.70), 0 0 28px rgba(223,184,108,.18);
+    }
+
+    .cta-strip p {
+      max-width: 620px;
+      color: rgba(255,255,255,.70);
+    }
+
+    .cta-tel-btn {
+      border-color: rgba(223,184,108,.30) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 36px rgba(0,0,0,.28);
+    }
+
+    .cta-tel-btn:hover {
+      border-color: rgba(223,184,108,.58) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 48px rgba(223,184,108,.14);
+    }
+
+    .netx {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(223,184,108,.12), transparent 28%),
+        radial-gradient(circle at 18% 56%, rgba(223,184,108,.07), transparent 31%),
+        linear-gradient(180deg, #050505 0%, #0a0805 54%, #050505 100%);
+    }
+
+    .netx-inner {
+      filter: drop-shadow(0 28px 72px rgba(0,0,0,.32));
+    }
+
+    .netx-title .netx-t2 {
+      text-shadow: 0 0 34px rgba(223,184,108,.22), 0 22px 56px rgba(0,0,0,.60);
+    }
+
+    .netx-sub {
+      color: rgba(255,255,255,.72);
+    }
+
+    .netx-map-panel {
+      border-color: rgba(223,184,108,.30);
+      box-shadow: 0 40px 120px rgba(0,0,0,.52), 0 0 42px rgba(223,184,108,.08), inset 0 1px 0 rgba(255,255,255,.08);
+      transform-style: preserve-3d;
+    }
+
+    .netx-branch {
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
+    }
+
+    .netx-branch:hover {
+      transform: translateY(-4px) scale(1.015);
+      background: rgba(223,184,108,.045);
+      box-shadow: 0 18px 48px rgba(0,0,0,.28), 0 0 24px rgba(223,184,108,.10);
+    }
+
+    .netx-counter {
+      text-shadow: 0 0 34px rgba(223,184,108,.18);
+    }
+
   </style>
 </head>
 <body>
@@ -2645,6 +2747,47 @@
         );
       }
     });
+
+    /* CTA + NETWORK PREMIUM MOTION */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const ctaInner = document.querySelector('.cta-strip-inner');
+      if (ctaInner) {
+        gsap.fromTo(ctaInner,
+          { y: 46, opacity: .82, scale: .985 },
+          { y: 0, opacity: 1, scale: 1, duration: 1.1, ease:'power3.out', scrollTrigger:{ trigger:'.cta-strip', start:'top 82%' } }
+        );
+        gsap.from('.cta-strip-btns a', {
+          y: 22,
+          opacity: 0,
+          stagger: .10,
+          duration: .9,
+          ease:'power3.out',
+          scrollTrigger:{ trigger:'.cta-strip', start:'top 72%' }
+        });
+      }
+
+      const netPanel = document.querySelector('.netx-map-panel');
+      if (netPanel) {
+        gsap.fromTo(netPanel,
+          { y: 60, rotationX: 8, opacity: .70 },
+          { y: 0, rotationX: 0, opacity: 1, duration: 1.25, ease:'power3.out', scrollTrigger:{ trigger:'.netx-map-panel', start:'top 84%' } }
+        );
+        gsap.from('.netx-branch', {
+          y: 22,
+          opacity: 0,
+          stagger: .045,
+          duration: .65,
+          ease:'power2.out',
+          scrollTrigger:{ trigger:'.netx-branch-list', start:'top 86%' }
+        });
+        gsap.to('.netx-glow', {
+          y: -38,
+          scale: 1.12,
+          ease:'none',
+          scrollTrigger:{ trigger:'.netx', start:'top bottom', end:'bottom top', scrub:1.4 }
+        });
+      }
+    }
 
     /* NAVBAR */
     window.addEventListener('scroll', () => {
