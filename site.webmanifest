@@ -1,0 +1,16 @@
+{
+  "name": "מלך הנרגילות - אירועים",
+  "short_name": "מלך הנרגילות",
+  "description": "עמדות נרגילה פרימיום לאירועים, חתונות ומסיבות בכל הארץ.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#060606",
+  "theme_color": "#060606",
+  "icons": [
+    { "src": "/web-app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/web-app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
